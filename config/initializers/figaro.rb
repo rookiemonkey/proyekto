@@ -1,0 +1,1 @@
+Figaro.require_keys("PAYMONGO_PK", "PAYMONGO_SK")
