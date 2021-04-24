@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  # PAYMENTS
   post '/new/payment/intent', to: 'paymongo#create', as: 'new_payment_intent'
+
+  # ORGANIZATIONS
+  get '/dashboard', to: 'organization#dashboard', as: 'organization_dashboard'
+  get '/projects', to: 'organization#projects', as: 'organization_projects'
+  get '/colleagues', to: 'organization#colleagues', as: 'orgazniation_colleagues'
+
+  # PROJECT
+  get '/projects/:pid', to: 'project#read', as: 'organization_project'
+  put '/projects/:pid', to: 'project#update', as: 'organization_project_update'
+  delete '/projects/:pid', to: 'project#delete', as: 'organization_project_delete'
+  post '/projects/new', to: 'project#create', as: 'new_organization_project'
 end
