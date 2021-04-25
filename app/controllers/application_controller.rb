@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name organization])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name organization])
   end
 
   def set_current_tenant_based_on_user_organization
