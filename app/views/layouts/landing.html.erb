@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= render 'layouts/meta_headers' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+
+  <%= javascript_pack_tag 'main', 'data-turbolinks-track': 'reload' %>
+</html>

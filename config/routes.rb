@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, 
+    controllers: { sessions: 'users/sessions', registrations: 'users/registrations' },
+    path_names: { sign_in: 'signin', sign_up: 'signup', sign_out: 'signout' }
+
+  root to: 'home#home'
 
   # PAYMENTS
   post '/new/payment/intent', to: 'paymongo#create', as: 'new_payment_intent'
