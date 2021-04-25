@@ -3,6 +3,7 @@ class CreateOrganizations < ActiveRecord::Migration[6.1]
     create_table :organizations do |t|
       t.string :name
       t.string :subdomain
+      t.string :plan
       t.timestamps
     end
   end
