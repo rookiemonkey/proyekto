@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
   <head>
-    <title>ProjectManagementSystem</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/meta_headers' %>
   </head>
 
   <body>
     <%= yield %>
   </body>
+
+  <%= javascript_pack_tag 'main', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'chart', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'chart_sample', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
 </html>
