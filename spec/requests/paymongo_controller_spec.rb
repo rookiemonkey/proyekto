@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PaymongoController, type: :request do
+  let(:user) { create(:user) }
+
+  before { sign_in(user) }
+
   describe 'POST /new/payment/intent' do
     before { post new_payment_intent_path, params: { plan: 'standard' } }
 
