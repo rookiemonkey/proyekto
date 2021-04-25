@@ -20,10 +20,6 @@ class ProjectController < ApplicationController
 
   private
 
-  def set_project
-    @project = Project.find(params[:pid])
-  end
-
   def project_params
     params.require(:project).permit(:name)
   end

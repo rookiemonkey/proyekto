@@ -43,14 +43,16 @@ RSpec.describe ProjectController, type: :request do
     let(:project) { user.organization.projects.sample }
     let(:params) { { project: { name: 'New Name' } }  }
 
-    before { put organization_project_update_path(project), params: params }
+    before do
+      put organization_project_update_path(project), params: params
+      project.reload
+    end
 
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
 
     it 'updates the project name' do
-      project.reload
       expect(project.name).to eq(params[:project][:name])
     end
   end

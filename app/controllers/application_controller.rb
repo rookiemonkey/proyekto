@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_tenant_based_on_user_organization
 
+  def set_project
+    @project = Project.find(params[:pid])
+  end
+
   protected
 
   def configure_permitted_parameters
