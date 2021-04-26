@@ -1,0 +1,33 @@
+<aside class="aside is-placed-left is-expanded">
+  <div class="aside-tools">
+    <div class="aside-tools-label" style="display: flex; align-items: center">
+      <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
+    </div>
+  </div>
+  <div class="menu is-menu-main">
+    <p class="menu-label">General</p>
+    <ul class="menu-list">
+      <li>
+        <%= link_to organization_dashboard_path, class: 'is-active router-link-active has-iconn' do %>
+          <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
+          <span class="menu-item-label">Dashboard</span>
+        <% end %>
+      </li>
+    </ul>
+    <p class="menu-label">Options</p>
+    <ul class="menu-list">
+      <li>
+        <%= link_to organization_projects_path, class: 'has-icon' do %>
+          <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span>
+          <span class="menu-item-label">Projects</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to orgazniation_colleagues_path, class: 'has-icon' do %>
+          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+          <span class="menu-item-label">Colleagues</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</aside>

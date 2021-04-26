@@ -1,0 +1,32 @@
+<nav id="navbar-main" class="navbar is-fixed-top">
+  <div class="navbar-brand is-right">
+    <a class="navbar-item is-hidden-desktop jb-navbar-menu-toggle" data-target="navbar-menu">
+      <span class="icon"><i class="mdi mdi-dots-vertical"></i></span>
+    </a>
+  </div>
+  <div class="navbar-menu fadeIn animated faster" id="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
+        <a class="navbar-link is-arrowless">
+          <div class="is-user-avatar">
+            <img src="https://avatars.dicebear.com/v2/initials/<%= current_user.full_name.parameterize %>.svg" alt="<%= current_user.full_name %>">
+          </div>
+          <div class="is-user-name">
+            <span><%= current_user.full_name %></span>
+          </div>
+          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
+        </a>
+        <div class="navbar-dropdown">
+          <a href="#" class="navbar-item">
+            <span class="icon"><i class="mdi mdi-account"></i></span>
+            <span>My Profile</span>
+          </a>
+          <a data-target="logout" class="navbar-item jb-modal">
+            <span class="icon"><i class="mdi mdi-logout"></i></span>
+            <span>Log out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
