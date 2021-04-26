@@ -10,11 +10,7 @@ class Project < ApplicationRecord
   def organization_plan_restrictions
     return unless organization
 
-    restrict_by_plan if organization_reaches_project_limit
-  end
-
-  def restrict_by_plan
-    errors.add(:organization, 'plan restriction')
+    errors.add(:organization, 'plan restriction') if organization_reaches_project_limit
   end
 
   def organization_reaches_project_limit
