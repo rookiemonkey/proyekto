@@ -10,19 +10,17 @@ class Project < ApplicationRecord
   def organization_plan_restrictions
     return unless organization
 
-    restrict_by_plan if plan_is_free_and_reaches_project_limit
-    restrict_by_plan if plan_is_standard_and_reaches_project_limit
+    restrict_by_plan if organization_reaches_project_limit
   end
 
   def restrict_by_plan
     errors.add(:organization, 'plan restriction')
   end
 
-  def plan_is_free_and_reaches_project_limit
-    organization.plan == 'free' && organization.projects.count == Plans.available_plans[:free][:project_limit]
-  end
+  def organization_reaches_project_limit
+    plan = organization.plan.to_sym
+    return false if plan == :enterprise
 
-  def plan_is_standard_and_reaches_project_limit
-    organization.plan == 'standard' && organization.projects.count == Plans.available_plans[:standard][:project_limit]
+    organization.projects.count == Plans.available_plans[plan][:project_limit]
   end
 end
