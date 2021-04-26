@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
-  let(:organization) { create(:organization) }
+  let(:organization) { create(:organization, plan: 'free') }
 
   context 'with default subdomain value' do
     it 'uses parameterized version of the name' do

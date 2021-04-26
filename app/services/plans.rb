@@ -4,9 +4,18 @@
 class Plans
   def self.available_plans
     {
-      free: 0,
-      standard: 150_000,
-      enterprise: 250_000
+      free: {
+        price: 0,
+        project_limit: 1
+      },
+      standard: {
+        price: 150_000,
+        project_limit: 3
+      },
+      enterprise: {
+        price: 250_000,
+        project_limit: 0
+      }
     }
   end
 end

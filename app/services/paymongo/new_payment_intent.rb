@@ -12,7 +12,7 @@ module Paymongo::NewPaymentIntent
       {
         data: {
           attributes: {
-            amount: @plans[plan],
+            amount: @plans[plan][:price],
             payment_method_allowed: ['card'],
             payment_method_options: {
               card: { request_three_d_secure: 'any' }
