@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ProjectController, type: :request do
   let(:user) { create(:user) }
+  let(:project) { user.organization.projects.sample }
 
   before do
     sign_in(user)
     create_list(:project, 5, organization: user.organization)
+    create_list(:artifact, 5, project: project)
   end
 
   describe 'GET /projects/:id' do
-    let(:project) { user.organization.projects.sample }
-
     before { get organization_project_path(project) }
 
     it 'returns http success' do
@@ -23,6 +23,10 @@ RSpec.describe ProjectController, type: :request do
 
     it 'has @project instance variable' do
       expect(assigns(:project)).to eq(project)
+    end
+
+    it 'has @artifacts instance variable' do
+      expect(assigns(:artifacts)).to eq(project.artifacts)
     end
   end
 

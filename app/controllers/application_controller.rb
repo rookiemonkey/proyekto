@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     @project = Project.find(params[:pid])
   end
 
+  def set_artifacts
+    @artifacts = @project.artifacts
+  end
+
   protected
 
   def configure_permitted_parameters

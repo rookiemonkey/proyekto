@@ -1,0 +1,23 @@
+.tile-is-ancestor-custom {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tile-is-child-custom {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px !important;
+}
+
+.tile-is-parent-custom {
+  transition: transform 200ms ease-in-out;
+  cursor: pointer;
+}
+
+.tile-is-parent-custom:hover {
+  transform: translateY(-5px);
+}
+
+@media screen and (max-width: 450px) {
+  .tile-is-ancestor-custom {
+    display: block !important;
+  }
+}

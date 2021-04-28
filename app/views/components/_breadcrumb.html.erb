@@ -1,0 +1,23 @@
+<section class="section is-title-bar">
+  <div class="level">
+    <div class="level-left">
+      <div class="level-item">
+        <ul>
+        
+          <li>
+            <%= link_to current_tenant.name, organization_dashboard_path %>
+          </li>
+
+          <% breadcrumbs.each do |breadcrumb| %>
+            <% if breadcrumb.is_a? String %>
+              <li><%= breadcrumb %></li>
+            <% else %>
+              <li><%= link_to breadcrumb[:label], breadcrumb[:url] %></li>
+            <% end %>
+          <% end %>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

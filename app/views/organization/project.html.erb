@@ -1,1 +1,51 @@
-<h1>ORGANIZATION PROJECT</h1>
+<% breadcrumb_one = { label: 'Projects', url: organization_projects_path } %>
+<% breadcrumb_two = { label: @project.name, url: organization_project_path(@project) }  %>
+<%= render 'components/breadcrumb', breadcrumbs: [breadcrumb_one, breadcrumb_two, 'Artifacts'] %>
+
+<section class="section section-main">
+  <div class="card has-table has-mobile-sort-spaced">
+    <div class="card-content">
+      <div class="b-table has-pagination">
+        <div class="table-wrapper has-mobile-cards">
+          <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
+            <thead>
+
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% @artifacts.each do |artifact| %>
+
+                <tr>
+                  <td class="is-image-cell">
+                    <div class="image">
+                      <img src="https://avatars.dicebear.com/v2/initials/<%= artifact.name.parameterize %>.svg" class="is-rounded">
+                    </div>
+                  </td>
+                  <td data-label="Name">
+                    <%= artifact.name %>
+                  </td>
+                  <td data-label="Description">
+                    <%= artifact.description %>
+                  </td>
+                  <td data-label="Image">
+                    IMAGE HERE
+                  </td>
+                  <td class="is-actions-cell"></td>
+                </tr>
+                
+              <% end %>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
