@@ -47,3 +47,5 @@ gem "figaro", "~> 1.2"
 gem "devise", "~> 4.7"
 
 gem "acts_as_tenant", "~> 0.5.0"
+
+gem "google-cloud-storage", "~> 1.31"
