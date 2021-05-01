@@ -10,4 +10,8 @@ class OrganizationController < ApplicationController
   def colleagues
     @colleagues = User.all
   end
+
+  def artifacts
+    @artifacts = Artifact.of(current_tenant)
+  end
 end

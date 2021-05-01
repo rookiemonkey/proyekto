@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'organization#dashboard', as: 'organization_dashboard'
   get '/projects', to: 'organization#projects', as: 'organization_projects'
   get '/colleagues', to: 'organization#colleagues', as: 'orgazniation_colleagues'
+  get '/artifacts', to: 'organization#artifacts', as: 'orgazniation_artifacts'
 
   # PROJECT
   get '/projects/:pid', to: 'project#read', as: 'organization_project'
