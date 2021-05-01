@@ -25,7 +25,7 @@
         </section>
         <footer class="modal-card-foot">
           <button class="button jb-modal-close">Cancel</button>
-          <button class="button is-danger jb-modal-close">Delete</button>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'button is-danger' %>
         </footer>
       </div>
       <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
