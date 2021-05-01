@@ -1,1 +1,47 @@
-<h1>PROJECT ARTIFACTS</h1>
+<%= render 'components/breadcrumb', breadcrumbs: ['Artifacts'] %>
+
+<section class="section section-main">
+  <div class="card has-table has-mobile-sort-spaced">
+    <div class="card-content">
+      <div class="b-table has-pagination">
+        <div class="table-wrapper has-mobile-cards">
+          <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
+            <thead>
+
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Project</th>
+              <th>Image</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% @artifacts.each do |artifact| %>
+
+                <tr>
+                  <td data-label="Name">
+                    <%= artifact.name %>
+                  </td>
+                  <td data-label="Description">
+                    <%= artifact.description %>
+                  </td>
+                  <td data-label="Project">
+                    <%= artifact.project.name %>
+                  </td>
+                  <td data-label="Image">
+                    IMAGE HERE
+                  </td>
+                  <td class="is-actions-cell"></td>
+                </tr>
+                
+              <% end %>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

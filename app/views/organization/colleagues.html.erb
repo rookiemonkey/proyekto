@@ -1,3 +1,5 @@
+<%= render 'components/breadcrumb', breadcrumbs: ['Colleagues'] %>
+
 <section class="section section-main">
   <div class="card has-table has-mobile-sort-spaced">
     <div class="card-content">
@@ -9,6 +11,7 @@
             <tr>
               <th></th>
               <th>Full Name</th>
+              <th>Since</th>
               <th></th>
             </tr>
             </thead>
@@ -24,6 +27,9 @@
                   </td>
                   <td data-label="Name">
                     <%= colleague.full_name %>
+                  </td>
+                  <td data-label="Since">
+                    <%= colleague.created_at %>
                   </td>
                   <td class="is-actions-cell"></td>
                 </tr>

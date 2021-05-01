@@ -8,25 +8,35 @@
     <p class="menu-label">General</p>
     <ul class="menu-list">
       <li>
-        <%= link_to organization_dashboard_path, class: 'is-active router-link-active has-iconn' do %>
+        <a  href="<%= organization_dashboard_path %>" 
+            class='<% if params[:action] == 'dashboard' %>is-active<% end %> router-link-active has-icon'>
           <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
           <span class="menu-item-label">Dashboard</span>
-        <% end %>
+        </a>
       </li>
     </ul>
     <p class="menu-label">Options</p>
     <ul class="menu-list">
       <li>
-        <%= link_to organization_projects_path, class: 'has-icon' do %>
-          <span class="icon has-update-mark"><i class="mdi mdi-table"></i></span>
+        <a  href="<%= organization_projects_path %>" 
+            class="has-icon <% if params[:action] == 'projects' %>is-active<% end %>">
+          <span class="icon"><i class="mdi mdi-table"></i></span>
           <span class="menu-item-label">Projects</span>
-        <% end %>
+        </a>
       </li>
       <li>
-        <%= link_to orgazniation_colleagues_path, class: 'has-icon' do %>
+        <a  href="<%= orgazniation_artifacts_path %>" 
+            class="has-icon <% if params[:action] == 'artifacts' %>is-active<% end %>">
+          <span class="icon"><i class="mdi mdi-hexagon-slice-6"></i></span>
+          <span class="menu-item-label">Artifacts</span>
+        </a>
+      </li>
+      <li>
+        <a  href="<%= orgazniation_colleagues_path %>" 
+            class="has-icon <% if params[:action] == 'colleagues' %>is-active<% end %>">
           <span class="icon"><i class="mdi mdi-account-circle"></i></span>
           <span class="menu-item-label">Colleagues</span>
-        <% end %>
+        </a>
       </li>
     </ul>
   </div>
