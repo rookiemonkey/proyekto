@@ -35,7 +35,7 @@ RSpec.describe ProjectController, type: :request do
 
     it 'returns http success' do
       post_request
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(organization_projects_path)
     end
 
     it 'creates a single project' do

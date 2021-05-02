@@ -1,0 +1,32 @@
+<div id="new-project" class="modal">
+  <div class="modal-background jb-modal-close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Project</p>
+      <button class="delete jb-modal-close" aria-label="close"></button>
+    </header>
+
+    <%= form_with scope: :project, url: new_organization_project_path, method: :post do |form| %>
+      <section class="modal-card-body">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Name</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <%= form.text_field :name, class: 'input', required: true, autocomplete: :off %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button type="button" class="button jb-modal-close">Cancel</button>
+        <button type="submit" class="button is-primary">Submit</button>
+      </footer>
+    <% end %>
+
+  </div>
+  <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
+</div>

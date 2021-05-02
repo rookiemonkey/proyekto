@@ -1,0 +1,17 @@
+<div id="logout" class="modal">
+  <div class="modal-background jb-modal-close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Confirm action</p>
+      <button class="delete jb-modal-close" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <p>Are you sure you want to logout?</p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button jb-modal-close">Cancel</button>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'button is-danger' %>
+    </footer>
+  </div>
+  <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
+</div>

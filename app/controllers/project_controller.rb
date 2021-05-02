@@ -9,6 +9,7 @@ class ProjectController < ApplicationController
 
   def create
     Project.create(project_params)
+    redirect_to(organization_projects_path)
   end
 
   def update
