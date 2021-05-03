@@ -4,28 +4,36 @@
   <div class="tile is-ancestor tile-is-ancestor-custom">
 
     <% @projects.each do |project| %>
+      <% handle = "#{project.id}-#{project.name.parameterize}" %>
     
-      <a href="<%= organization_project_path(project) %>">
-        <div class="tile is-parent tile-is-parent-custom">
-          <div class="card tile is-child tile-is-child-custom">
-            <div class="card-content">
-              <div class="level is-mobile">
-                <div class="level-item">
-                  <div class="is-widget-label">
-                    <h3 class="subtitle is-spaced">
-                      <%= project.name %>
-                    </h3>
-                  </div>
-                </div>
-                <div class="level-item has-widget-icon">
-                  <div class="is-widget-icon"><span class="icon has-text-primary is-large"><i class="mdi mdi-progress-wrench mdi-48px"></i></span>
-                  </div>
-                </div>
-              </div>
+      <div class="tile is-parent tile-is-parent-custom">
+        <div class="card tile is-child tile-is-child-custom">
+          <div class="card-content">
+            <div class="level is-mobile">
+              <h3 class="subtitle is-spaced">
+                <a href="<%= organization_project_path(project) %>">
+                  <%= project.name %>
+                </a>
+              </h3>
             </div>
+              <div class="is-clearfix">
+                <button class="button is-small is-danger is-pulled-right ml-1 jb-modal" 
+                  type="button" 
+                  data-target="delete-project-<%= handle %>"> 
+                  <span class="icon"><i class="mdi mdi-window-close"></i></span>
+                </button>
+                <button class="button is-small is-warning is-pulled-right ml-1 jb-modal" 
+                  type="button"
+                  data-target="update-project-<%= handle %>">
+                  <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                </button>
+              </div>
           </div>
         </div>
-      </a>
+      </div>
+
+      <%= render 'components/modal_project_delete', project: project, handle: handle %>
+      <%= render 'components/modal_project_update', project: project, handle: handle %>
 
     <% end %>
 

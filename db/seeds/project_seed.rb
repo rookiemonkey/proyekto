@@ -1,6 +1,6 @@
 module Seeds
   class Project
-    @@count = 4
+    @@count = 10
     @@all = nil
 
     def self.produce

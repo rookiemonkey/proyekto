@@ -33,7 +33,7 @@ RSpec.describe ProjectController, type: :request do
   describe 'POST /projects/new' do
     let(:post_request) { post new_organization_project_path, params: { project: attributes_for(:project) } }
 
-    it 'returns http success' do
+    it 'returns http redirect to /projects' do
       post_request
       expect(response).to redirect_to(organization_projects_path)
     end
@@ -52,8 +52,8 @@ RSpec.describe ProjectController, type: :request do
       project.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect to /projects' do
+      expect(response).to redirect_to(organization_projects_path)
     end
 
     it 'updates the project name' do
@@ -65,9 +65,9 @@ RSpec.describe ProjectController, type: :request do
     let(:project) { user.organization.projects.sample }
     let(:delete_request) { delete organization_project_delete_path(project) }
 
-    it 'returns http success' do
+    it 'returns http redirect to /projects' do
       delete_request
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(organization_projects_path)
     end
 
     it 'deletes a single project' do

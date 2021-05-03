@@ -14,10 +14,12 @@ class ProjectController < ApplicationController
 
   def update
     @project.update(project_params)
+    redirect_to(organization_projects_path)
   end
 
   def delete
     @project.destroy
+    redirect_to(organization_projects_path)
   end
 
   private
