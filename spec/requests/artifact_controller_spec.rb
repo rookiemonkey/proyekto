@@ -46,13 +46,61 @@ RSpec.describe ArtifactController, type: :request do
   describe 'POST /projects/:pid/artifacts/new' do
     let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
 
-    it 'returns http success' do
+    it 'returns http redirect to fallback (dashboard)' do
       post_request
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'creates a single artifact' do
       expect { post_request }.to change { Artifact.all.length }.by(1)
+    end
+  end
+
+  describe 'POST /projects/:pid/artifacts/new (Upload Big Images)' do
+    let(:post_request) do
+      post(
+        new_organization_project_artifact_path(project),
+        params: {
+          artifact: {
+            **attributes_for(:artifact),
+            image: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/morethan_1mb.jpg'), 'image/jpeg')
+          }
+        }
+      )
+    end
+
+    it 'shows an error that file is too big' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('File is too big')
+    end
+
+    it 'does\'nt create an artifact' do
+      expect { post_request }.not_to change(Artifact, :count)
+    end
+  end
+
+  describe 'POST /projects/:pid/artifacts/new (Upload Not Image)' do
+    let(:post_request) do
+      post(
+        new_organization_project_artifact_path(project),
+        params: {
+          artifact: {
+            **attributes_for(:artifact),
+            image: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/im_not_an_image.png'), 'image/png')
+          }
+        }
+      )
+    end
+
+    it 'shows an error that file not an image' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('File is not an image')
+    end
+
+    it 'does\'nt create an artifact' do
+      expect { post_request }.not_to change(Artifact, :count)
     end
   end
 
@@ -64,8 +112,8 @@ RSpec.describe ArtifactController, type: :request do
       artifact.reload
     end
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'returns http redirect to fallback (dashboard)' do
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'updated the artifact name' do
@@ -80,9 +128,9 @@ RSpec.describe ArtifactController, type: :request do
   describe 'DELETE /projects/:pid/artifacts/:aid' do
     let(:delete_request) { delete organization_project_artifact_delete_path(project, artifact) }
 
-    it 'returns http success' do
+    it 'returns http redirect to fallback (dashboard)' do
       delete_request
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'deletes a single project' do

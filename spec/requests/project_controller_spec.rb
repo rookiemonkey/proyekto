@@ -52,8 +52,8 @@ RSpec.describe ProjectController, type: :request do
       project.reload
     end
 
-    it 'returns http redirect to /projects' do
-      expect(response).to redirect_to(organization_projects_path)
+    it 'returns http redirect to fallback (dashboard)' do
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'updates the project name' do
@@ -65,9 +65,9 @@ RSpec.describe ProjectController, type: :request do
     let(:project) { user.organization.projects.sample }
     let(:delete_request) { delete organization_project_delete_path(project) }
 
-    it 'returns http redirect to /projects' do
+    it 'returns http redirect to fallback (dashboard)' do
       delete_request
-      expect(response).to redirect_to(organization_projects_path)
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'deletes a single project' do

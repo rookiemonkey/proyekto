@@ -9,6 +9,7 @@ Consider checking the repo's issues, all of my todos are in there :smile:
 * Environment Variables
   * PAYMONGO_PK
   * PAYMONGO_SK
+  * GLCOUD_BUCKET_NAME
   * GCLOUD_PROJECT_ID
   * GCLOUD_PRIVATE_KEY_ID
   * GCLOUD_PRIVATE_KEY
@@ -30,6 +31,9 @@ Consider checking the repo's issues, all of my todos are in there :smile:
     * https://cloud.google.com/iam/docs/creating-managing-service-account-keys
   * Set the google cloud environment variables (pattern, 'GCLOUD_*') in strings. Values for this keys will come from the downloaded json file
   * An initializer file will be the one to create the .json automatically so we don't have to include the .json file on the source code and all we need is to define the keys as environment variables
+
+## Notes
+- As of the moment, this app uses the ```guro-app``` google cloud project to have an access to a cloud storage container. This is because i've reached the maximum amount of projects that I can apply my current billing account number (Cloud Storage requires a billing account number)
 
 ## Author: <i>Kevin Roi R. Basina</i>
 <a href="https://github.com/rookiemonkey">

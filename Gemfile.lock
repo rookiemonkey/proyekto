@@ -168,6 +168,9 @@ GEM
     marcel (1.0.1)
     memoist (0.16.2)
     method_source (1.0.0)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.3)
     minitest (5.14.4)
     msgpack (1.4.2)
@@ -358,6 +361,7 @@ DEPENDENCIES
   hirb (~> 0.7.3)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mimemagic (~> 0.4.3)
   pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

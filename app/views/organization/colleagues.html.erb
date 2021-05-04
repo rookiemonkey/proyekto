@@ -22,7 +22,7 @@
                 <tr>
                   <td class="is-image-cell">
                     <div class="image">
-                      <img src="https://avatars.dicebear.com/v2/initials/<%= colleague.full_name.parameterize %>.svg" class="is-rounded">
+                      <%= avatar_for(colleague.full_name) %>
                     </div>
                   </td>
                   <td data-label="Name">

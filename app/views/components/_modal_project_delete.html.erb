@@ -9,7 +9,7 @@
         <p>Are you sure you want to delete <%= project.name %>?</p>
       </section>
       <footer class="modal-card-foot">
-        <button class="button jb-modal-close">Cancel</button>
+        <button type="button" class="button jb-modal-close">Cancel</button>
         <%= link_to 'Delete', organization_project_delete_path(project), method: :delete, class: 'button is-danger' %>
       </footer>
     </div>
