@@ -14,6 +14,10 @@
  *= require_self
  */
 
- .section-main {
+ section.section-main {
    min-height: 70vh;
+ }
+
+ section.section {
+   padding-top: 2.5%;
  }
