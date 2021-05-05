@@ -10,8 +10,23 @@ class Gcloud
     attr_reader :bucket
   end
 
+  def self.get(file_name)
+    return nil unless file_name
+
+    @bucket.file(file_name)
+  end
+
   def self.upload(path, file_name)
     uploaded_file = Gcloud.bucket.create_file(File.open(path), file_name)
     { image_url: uploaded_file.public_url, image_name: file_name }
+  end
+
+  def self.delete(file_name)
+    return nil unless file_name
+
+    file = get(file_name)
+    return nil unless file
+
+    file.delete
   end
 end
