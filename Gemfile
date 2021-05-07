@@ -51,3 +51,5 @@ gem "acts_as_tenant", "~> 0.5.0"
 gem "google-cloud-storage", "~> 1.31"
 
 gem "mimemagic", "~> 0.4.3"
+
+gem "id_generator", "~> 1.0"

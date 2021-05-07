@@ -4,3 +4,13 @@
   min-height: 270px;
   min-width: 100%;
 }
+
+.artifact-card .artifact-card-name-container,
+.artifact-card .artifact-card-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.artifact-card .artifact-card-buttons button {
+  border: none;
+}

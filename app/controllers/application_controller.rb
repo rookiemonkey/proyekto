@@ -15,10 +15,6 @@ class ApplicationController < ActionController::Base
     @artifacts = @project.artifacts
   end
 
-  def short_id
-    DateTime.now.strftime('%Y%m%d%k%M%S%L').to_i.to_s(36)
-  end
-
   protected
 
   def configure_permitted_parameters

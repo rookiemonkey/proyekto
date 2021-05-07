@@ -136,5 +136,9 @@ RSpec.describe ArtifactController, type: :request do
     it 'deletes a single project' do
       expect { delete_request }.to change { Artifact.all.length }.by(-1)
     end
+
+    it 'deletes the image on google cloud storage' do
+      expect(Gcloud.get(artifact.image_name)).to eq(nil)
+    end
   end
 end

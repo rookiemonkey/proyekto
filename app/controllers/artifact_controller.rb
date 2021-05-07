@@ -21,7 +21,9 @@ class ArtifactController < ApplicationController
   end
 
   def update
-    @artifact.update(artifact_params)
+    upload_details = {}
+    upload_details = Gcloud.upload(artifact_image.tempfile.path, @artifact.image_name || artifact_image_name) if artifact_image
+    @artifact.update(**artifact_params, **upload_details)
     redirect_back(fallback_location: organization_dashboard_path)
   end
 
@@ -64,6 +66,6 @@ class ArtifactController < ApplicationController
   def artifact_image_name
     period = artifact_image.original_filename.rindex('.')
     extension = artifact_image.original_filename[period, artifact_image.original_filename.length]
-    "#{short_id}#{extension}"
+    "#{IdGenerator.generate}#{extension}"
   end
 end

@@ -18,7 +18,8 @@ class Gcloud
 
   def self.upload(path, file_name)
     uploaded_file = Gcloud.bucket.create_file(File.open(path), file_name)
-    { image_url: uploaded_file.public_url, image_name: file_name }
+    authenticated_url = 'https://storage.cloud.google.com/proyekto-artifacts/'
+    { image_url: "#{authenticated_url}#{uploaded_file.name}", image_name: file_name }
   end
 
   def self.delete(file_name)

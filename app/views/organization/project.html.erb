@@ -46,6 +46,7 @@
 
   <div class="tile is-ancestor tile-is-ancestor-custom">
     <% @artifacts.each do |artifact| %>
+      <% handle = "#{artifact.id}-#{artifact.name.parameterize}" %>
 
       <div class="tile is-parent tile-is-parent-custom artifact-card">
         <div class="card tile is-child tile-is-child-custom">
@@ -65,13 +66,25 @@
               </h5>
             </div>
 
-            <div class="is-clearfix artifact-card-description-container">
-              <%= artifact.description[0..55] + ' ...' %>
+            <div class="is-clearfix artifact-card-buttons">
+              <button class="button jb-modal ml-1" data-target="view-artifact-<%= handle %>">
+                <span class="icon has-text-success-dark"><i class="mdi mdi-magnify"></i></span>
+              </button>
+              <button class="button jb-modal ml-1" data-target="update-artifact-<%= handle %>">
+                <span class="icon has-text-warning-dark"><i class="mdi mdi-pencil"></i></span>
+              </button>
+              <button class="button jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
+                <span class="icon has-text-danger-dark"><i class="mdi mdi-window-close"></i></span>
+              </button>
             </div>
 
           </div>
         </div>
       </div>
+
+      <%= render 'components/modal_artifact_view', artifact: artifact, handle: handle %>
+      <%= render 'components/modal_artifact_update', project: @project, artifact: artifact, handle: handle %>
+      <%= render 'components/modal_artifact_delete', project: @project, artifact: artifact, handle: handle %>
 
     <% end %>
   </div>

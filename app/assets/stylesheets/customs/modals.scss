@@ -1,3 +1,8 @@
 .modal {
   z-index: 9999999 !important;
 }
+
+.modal-card-body .artifact-image {
+  display: flex;
+  justify-content: center;
+}
