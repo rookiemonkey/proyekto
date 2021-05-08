@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   include Exceptions::ApplicationErrors
   rescue_from UploadError, with: :handle_upload_error
 

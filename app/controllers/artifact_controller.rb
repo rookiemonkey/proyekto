@@ -5,7 +5,7 @@ class ArtifactController < ApplicationController
   before_action :validate_image_upload, only: %i[create]
 
   def read_all
-    @artifacts = @project.artifacts
+    @pagy, @artifacts = pagy(@project.artifacts, items: 30)
     render 'organization/artifacts'
   end
 

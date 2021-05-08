@@ -33,7 +33,7 @@ RSpec.describe Plans do
     end
 
     it 'leaves the last 3 created project not disabled' do
-      expect(organization.projects.where(disabled: false)).to eq(organization.projects[-3, organization.projects.length])
+      expect(organization.projects.where(disabled: false)).to eq(organization.projects[-3..])
     end
   end
 

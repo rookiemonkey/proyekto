@@ -9,7 +9,7 @@ RSpec.describe OrganizationController, type: :request do
     create_list(:project, 5) # not part of the user organization
     create_list(:artifact, 10) # not part of the user organization
     create_list(:project, 5, organization: organization) # part of the user organization
-    create_list(:artifact, 10, project: organization.projects.first) # part of the user organization
+    create_list(:artifact, 10, project: organization.projects.first, organization: organization) # part of the user organization
   end
 
   describe 'GET /dashboard' do
@@ -57,6 +57,10 @@ RSpec.describe OrganizationController, type: :request do
   end
 
   describe 'GET /artifacts' do
+    # for some reason, pagy returns an uninitialized error referring to params on backend.rb line:22
+    # adding the page: 1 as an option fixes the issue but not needed anymore on the controller
+    let(:artifacts) { pagy(Artifact.where(organization: user.organization), count: 30, items: 30, page: 1)[1] }
+
     before { get orgazniation_artifacts_path }
 
     it 'returns http success' do
@@ -68,7 +72,7 @@ RSpec.describe OrganizationController, type: :request do
     end
 
     it 'has @artifacts instance variable scoped to current_tenant (organization)' do
-      expect(assigns(:artifacts)).to eq(Artifact.of(user.organization))
+      expect(assigns(:artifacts)).to eq(artifacts)
     end
   end
 end
