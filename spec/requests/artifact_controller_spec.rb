@@ -27,22 +27,6 @@ RSpec.describe ArtifactController, type: :request do
     end
   end
 
-  describe 'GET /projects/:pid/artifacts/:aid' do
-    before { get organization_project_artifact_path(project, artifact) }
-
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'renders artifact template' do
-      expect(response).to render_template(:artifact)
-    end
-
-    it 'has @artifact instance variable' do
-      expect(assigns(:artifact)).to eq(artifact)
-    end
-  end
-
   describe 'POST /projects/:pid/artifacts/new' do
     let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
 

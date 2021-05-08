@@ -13,7 +13,7 @@
               <th>Image</th>
               <th>Description</th>
               <th>Project</th>
-              <th></th>
+              <th style="width: 15%"></th>
             </tr>
             </thead>
 
@@ -40,20 +40,16 @@
                     <%= project.name %>
                   </td>
                   <td data-label="Actions">
-                    <button class="button jb-modal ml-1" data-target="view-artifact-<%= handle %>">
-                      <span class="icon has-text-success-dark"><i class="mdi mdi-magnify"></i></span>
+                    <button class="button is-warning jb-modal ml-1" data-target="update-artifact-<%= handle %>">
+                      <span class="icon"><i class="mdi mdi-pencil"></i></span>
                     </button>
-                    <button class="button jb-modal ml-1" data-target="update-artifact-<%= handle %>">
-                      <span class="icon has-text-warning-dark"><i class="mdi mdi-pencil"></i></span>
-                    </button>
-                    <button class="button jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
-                      <span class="icon has-text-danger-dark"><i class="mdi mdi-window-close"></i></span>
+                    <button class="button is-danger jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
+                      <span class="icon"><i class="mdi mdi-window-close"></i></span>
                     </button>
                   </td>
                   <td class="is-actions-cell"></td>
                 </tr>
 
-                <%= render 'components/modal_artifact_view', artifact: artifact, handle: handle %>
                 <%= render 'components/modal_artifact_update', project: project, artifact: artifact, handle: handle %>
                 <%= render 'components/modal_artifact_delete', project: project, artifact: artifact, handle: handle %>
               <% end %>
