@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_011812) do
+ActiveRecord::Schema.define(version: 2021_05_08_125232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_011812) do
     t.bigint "project_id"
     t.string "image_url"
     t.string "image_name"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_artifacts_on_organization_id"
     t.index ["project_id"], name: "index_artifacts_on_project_id"
   end
 
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_011812) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "artifacts", "organizations"
   add_foreign_key "artifacts", "projects"
   add_foreign_key "projects", "organizations"
   add_foreign_key "users", "organizations"

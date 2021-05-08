@@ -7,7 +7,7 @@ RSpec.describe ProjectController, type: :request do
   before do
     sign_in(user)
     create_list(:project, 5, organization: user.organization)
-    create_list(:artifact, 5, project: project)
+    create_list(:artifact, 5, project: project, organization: user.organization)
   end
 
   describe 'GET /projects/:id' do

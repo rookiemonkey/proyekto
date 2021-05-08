@@ -12,6 +12,6 @@ class OrganizationController < ApplicationController
   end
 
   def artifacts
-    @artifacts = Artifact.of(current_tenant)
+    @pagy, @artifacts = pagy(Artifact.all, items: 30)
   end
 end

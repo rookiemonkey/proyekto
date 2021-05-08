@@ -1,0 +1,28 @@
+<% current_page = @pagy.vars[:page].to_i %>
+<% total_pages = @pagy.last %>
+
+<div class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <div class="buttons has-addons">
+
+        <% total_pages.times do |index| %>
+          <% page_num = index + 1 %>
+          <% if page_num == current_page %>
+            <a href="<%= "#{request.path}?page=#{page_num}" %>" class="button is-active"><%= page_num %></a>
+          <% else %>
+            <a href="<%= "#{request.path}?page=#{page_num}" %>" class="button"><%= page_num %></a>
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="level-right">
+    <div class="level-item">
+
+      <small>Page <%= current_page %> of <%= total_pages %></small>
+
+    </div>
+  </div>
+</div>

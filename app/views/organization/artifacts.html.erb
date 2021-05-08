@@ -1,5 +1,9 @@
 <%= render 'components/breadcrumb', breadcrumbs: ['Artifacts'] %>
 
+<section class="section">
+  <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
+</section>
+
 <section class="section section-main">
   <div class="card has-table has-mobile-sort-spaced">
     <div class="card-content">
@@ -60,4 +64,8 @@
       </div>
     </div>
   </div>
+</section>
+
+<section class="section">
+  <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
 </section>

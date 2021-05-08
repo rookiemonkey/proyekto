@@ -53,3 +53,5 @@ gem "google-cloud-storage", "~> 1.31"
 gem "mimemagic", "~> 0.4.3"
 
 gem "id_generator", "~> 1.0"
+
+gem "pagy", "~> 3.13"
