@@ -28,4 +28,5 @@ Rails.application.routes.draw do
 
   # COLLEAGUE
   post '/colleagues/new', to: 'colleague#create', as: 'new_organization_colleague'
+  put '/colleagues/new', to: 'colleague#accept', as: 'accept_organization_colleague'
 end
