@@ -15,7 +15,7 @@ RSpec.describe ColleagueController, type: :request do
     end
 
     it 'creates a single user' do
-      expect { post_request }.to change { User.count }.by(1)
+      expect { post_request }.to change(User, :count).by(1)
     end
 
     it 'creates a single user w/ inviation id' do

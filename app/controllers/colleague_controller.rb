@@ -1,6 +1,7 @@
 class ColleagueController < ApplicationController
   def create
-    User.create(**colleague_params, **colleague_default_params)
+    invited_colleague = User.create(**colleague_params, **colleague_default_params)
+    ColleagueMailer.with(colleague: invited_colleague).invitation_email.deliver_now
   end
 
   private
