@@ -1,0 +1,21 @@
+<div id="new-colleague" class="modal">
+  <div class="modal-background jb-modal-close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Colleague</p>
+      <button class="delete jb-modal-close" aria-label="close"></button>
+    </header>
+
+    <%= form_with url: new_organization_project_path, method: :post do |form| %>
+      <section class="modal-card-body">
+
+      </section>
+      <footer class="modal-card-foot">
+        <button type="button" class="button jb-modal-close">Cancel</button>
+        <button type="submit" class="button is-primary">Submit</button>
+      </footer>
+    <% end %>
+
+  </div>
+  <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
+</div>

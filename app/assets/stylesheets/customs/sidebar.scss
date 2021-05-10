@@ -1,0 +1,9 @@
+aside.aside .menu {
+  height: 90%;
+}
+
+.menu-divided {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

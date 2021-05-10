@@ -4,40 +4,59 @@
       <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
     </div>
   </div>
-  <div class="menu is-menu-main">
-    <p class="menu-label">General</p>
-    <ul class="menu-list">
-      <li>
-        <a  href="<%= organization_dashboard_path %>" 
-            class='<% if params[:action] == 'dashboard' %>is-active<% end %> router-link-active has-icon'>
-          <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-          <span class="menu-item-label">Dashboard</span>
-        </a>
-      </li>
-    </ul>
-    <p class="menu-label">Options</p>
-    <ul class="menu-list">
-      <li>
-        <a  href="<%= organization_projects_path %>" 
-            class="has-icon <% if params[:action] == 'projects' %>is-active<% end %>">
-          <span class="icon"><i class="mdi mdi-table"></i></span>
-          <span class="menu-item-label">Projects</span>
-        </a>
-      </li>
-      <li>
-        <a  href="<%= orgazniation_artifacts_path %>" 
-            class="has-icon <% if params[:action] == 'artifacts' %>is-active<% end %>">
-          <span class="icon"><i class="mdi mdi-hexagon-slice-6"></i></span>
-          <span class="menu-item-label">Artifacts</span>
-        </a>
-      </li>
-      <li>
-        <a  href="<%= orgazniation_colleagues_path %>" 
-            class="has-icon <% if params[:action] == 'colleagues' %>is-active<% end %>">
-          <span class="icon"><i class="mdi mdi-account-circle"></i></span>
-          <span class="menu-item-label">Colleagues</span>
-        </a>
-      </li>
-    </ul>
+  <div class="menu is-menu-main menu-divided">
+    <div class="menu-top">
+      <p class="menu-label">General</p>
+      <ul class="menu-list">
+        <li>
+          <a  href="<%= organization_dashboard_path %>" 
+              class='<% if params[:action] == 'dashboard' %>is-active<% end %> router-link-active has-icon'>
+            <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
+            <span class="menu-item-label">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+      <p class="menu-label">Options</p>
+      <ul class="menu-list">
+        <li>
+          <a  href="<%= organization_projects_path %>" 
+              class="has-icon <% if params[:action] == 'projects' %>is-active<% end %>">
+            <span class="icon"><i class="mdi mdi-table"></i></span>
+            <span class="menu-item-label">Projects</span>
+          </a>
+        </li>
+        <li>
+          <a  href="<%= orgazniation_artifacts_path %>" 
+              class="has-icon <% if params[:action] == 'artifacts' %>is-active<% end %>">
+            <span class="icon"><i class="mdi mdi-hexagon-slice-6"></i></span>
+            <span class="menu-item-label">Artifacts</span>
+          </a>
+        </li>
+        <li>
+          <a  href="<%= orgazniation_colleagues_path %>" 
+              class="has-icon <% if params[:action] == 'colleagues' %>is-active<% end %>">
+            <span class="icon"><i class="mdi mdi-account-circle"></i></span>
+            <span class="menu-item-label">Colleagues</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="menu-bottom">
+      <ul class="menu-list">
+        <li>
+          <a class='router-link-active has-icon jb-modal' data-target="new-colleague">
+            <span class="icon"><i class="mdi mdi-account-multiple-plus-outline"></i></span>
+            <span class="menu-item-label">Invite Colleague</span>
+          </a>
+        </li>
+        <li>
+          <a class='router-link-active has-icon jb-modal'>
+            <span class="icon"><i class="mdi mdi-credit-card-multiple"></i></span>
+            <span class="menu-item-label">Change Plan</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </aside>
