@@ -2,9 +2,24 @@ require 'rails_helper'
 
 RSpec.describe ColleagueController, type: :request do
   let(:user) { create(:user) }
-  let(:post_request) { post new_organization_colleague_path, params: { colleague: attributes_for(:user) } }
+  let(:post_request) { post create_organization_colleague_path, params: { colleague: attributes_for(:user) } }
 
   before { sign_in(user) }
+
+  describe 'GET /colleagues/new' do
+    before do
+      post_request
+      get new_organization_colleague_path, params: { invitation_id: User.last.invitation_id }
+    end
+
+    it 'returns https success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'renders new_colleague template' do
+      expect(response).to render_template(:new_colleague)
+    end
+  end
 
   describe 'POST /colleagues/new' do
     it 'returns http success' do
@@ -27,7 +42,7 @@ RSpec.describe ColleagueController, type: :request do
 
     before do
       post_request
-      put accept_organization_colleague_path, params: { colleague: { **params, invitation_id: User.last.invitation_id } }
+      put accept_organization_colleague_path, params: { colleague: params, invitation_id: User.last.invitation_id }
     end
 
     it 'returns http redirect to login' do
