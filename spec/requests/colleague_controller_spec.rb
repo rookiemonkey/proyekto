@@ -7,9 +7,11 @@ RSpec.describe ColleagueController, type: :request do
   before { sign_in(user) }
 
   describe 'GET /colleagues/new' do
+    subject(:get_request) { get new_organization_colleague_path, params: { invitation_id: User.last.invitation_id } }
+
     before do
       post_request
-      get new_organization_colleague_path, params: { invitation_id: User.last.invitation_id }
+      get_request
     end
 
     it 'returns https success' do
@@ -19,12 +21,16 @@ RSpec.describe ColleagueController, type: :request do
     it 'renders new_colleague template' do
       expect(response).to render_template(:new_colleague)
     end
+
+    it 'renders the landing layout' do
+      expect(get_request).to render_template('layouts/landing')
+    end
   end
 
   describe 'POST /colleagues/new' do
-    it 'returns http success' do
+    it 'returns http redirect to fallback (dashboard)' do
       post_request
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'creates a single user' do

@@ -1,0 +1,19 @@
+<%= form_with method: :put do |form| %>
+  <div>
+    <%= form.label 'New Password' %>
+    <%= form.password_field :'colleague[invite_new_password]' %>
+  </div>
+
+  <div>
+    <%= form.label 'Confirm New Password' %>
+    <%= form.password_field :'colleague[invite_new_password_confirm]' %>
+  </div>
+
+  <div style="display: none;">
+    <%= form.text_field 'invitation_id', value: @invited_colleague.invitation_id %>
+  </div>
+
+  <div>
+    <%= form.submit 'Accept' %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 class ColleagueController < ApplicationController
+  layout 'landing'
   before_action :find_invited_colleague, only: %i[new accept]
 
   def new
@@ -8,6 +9,7 @@ class ColleagueController < ApplicationController
   def create
     invited_colleague = User.create(**colleague_params, **colleague_default_params)
     ColleagueMailer.with(colleague: invited_colleague).invitation_email.deliver_later
+    redirect_back(fallback_location: organization_dashboard_path)
   end
 
   def accept
