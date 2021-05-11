@@ -1,0 +1,44 @@
+<div id="new-colleague" class="modal">
+  <div class="modal-background jb-modal-close"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">New Colleague</p>
+      <button class="delete jb-modal-close" aria-label="close"></button>
+    </header>
+
+    <%= form_with scope: :colleague, url: create_organization_colleague_path, method: :post do |form| %>
+      <section class="modal-card-body">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Full Name</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <%= form.text_field :full_name, class: 'input', required: true, autocomplete: :off %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Email Address</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <%= form.email_field :email, class: 'input', required: true, autocomplete: :off %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button type="button" class="button jb-modal-close">Cancel</button>
+        <button type="submit" class="button is-primary">Submit</button>
+      </footer>
+    <% end %>
+
+  </div>
+  <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
+</div>

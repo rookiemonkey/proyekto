@@ -26,4 +26,9 @@ Rails.application.routes.draw do
   delete '/projects/:pid/artifacts/:aid', to: 'artifact#delete', as: 'organization_project_artifact_delete'
   post '/projects/:pid/artifacts/new', to: 'artifact#create', as: 'new_organization_project_artifact'
 
+  # COLLEAGUE
+  get '/colleagues/new', to: 'colleague#new', as: 'new_organization_colleague'
+  post '/colleagues/new', to: 'colleague#create', as: 'create_organization_colleague'
+  put '/colleagues/new', to: 'colleague#accept', as: 'accept_organization_colleague'
+  get '/colleagues/decline', to: 'colleague#decline', as: 'decline_organization_colleague'
 end
