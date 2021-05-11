@@ -1,6 +1,6 @@
 class ColleagueController < ApplicationController
   layout 'landing'
-  before_action :find_invited_colleague, only: %i[new accept]
+  before_action :find_invited_colleague, only: %i[new accept decline]
 
   def new
     render 'users/new_colleague'
@@ -17,6 +17,11 @@ class ColleagueController < ApplicationController
     @invited_colleague.invitation_id = nil
     @invited_colleague.save
     redirect_to(new_user_session_path)
+  end
+
+  def decline
+    @invited_colleague.destroy
+    redirect_to(root_path)
   end
 
   private

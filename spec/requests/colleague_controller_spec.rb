@@ -27,6 +27,21 @@ RSpec.describe ColleagueController, type: :request do
     end
   end
 
+  describe 'GET /colleagues/decline' do
+    subject(:get_request) { get decline_organization_colleague_path, params: { invitation_id: User.last.invitation_id } }
+
+    before { post_request }
+
+    it 'redirects to root' do
+      get_request
+      expect(response).to redirect_to(root_path)
+    end
+
+    it 'deletes the user from database' do
+      expect { get_request }.to change(User, :count).by(-1)
+    end
+  end
+
   describe 'POST /colleagues/new' do
     it 'returns http redirect to fallback (dashboard)' do
       post_request
