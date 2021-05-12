@@ -2,7 +2,7 @@ import MultiStepForm from '../multi_step_form'
 import parseFormData from '../utilities/parseFormData'
 
 export default class Paymongo {
-  static publickKey = () => `${process.env.PAYMONGO_PK}`
+  static authenticationKey = () => window.btoa(process.env.PAYMONGO_PK)
   static cardInformationForm = () => document.getElementById('card_information_form')
 
   static initialize() {
@@ -23,13 +23,58 @@ export default class Paymongo {
       headers: {
         Accept: 'application/json', 
         'Content-Type': 'application/json', 
-        Authorization: `Basic ${window.btoa(this.publickKey())}`
+        Authorization: `Basic ${this.authenticationKey()}`
       },
       body: JSON.stringify(body)
     })
 
     const { data } = await raw.json()
     MultiStepForm.state = { ...MultiStepForm.state, strategy_state: { paymentMethodKey: data.id } }
+    await this.submitPaymentIntent()
+    await this.submitPayment()
+  }
+
+  static submitPaymentIntent = async () => {
+    const token = document.querySelector('meta[name="csrf-token"]').content
+
+    const raw = await fetch('/new/payment/intent', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        "X-CSRF-Token": token
+      },
+      body: JSON.stringify({ plan: MultiStepForm.state.chosen_plan.name })
+    })
+
+    const { CLIENT_KEY, PAYMENT_INTENT_ID } = await raw.json()
+
+    MultiStepForm.state = { 
+      ...MultiStepForm.state, 
+      strategy_state: { 
+        ...MultiStepForm.state.strategy_state,
+        clientKey: CLIENT_KEY, 
+        paymentIntentId: PAYMENT_INTENT_ID 
+      } 
+    }
+  }
+
+  static submitPayment = async () => {
+    const { paymentIntentId, clientKey, paymentMethodKey } = MultiStepForm.state.strategy_state
+    const body = { data: { attributes: { client_key: clientKey, payment_method: paymentMethodKey } } }
+
+    const raw = await fetch(`https://api.paymongo.com/v1/payment_intents/${paymentIntentId}/attach`, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${this.authenticationKey()}` 
+      },
+      body: JSON.stringify(body)
+    })
+
+    const response = await raw.json()
+    alert('Pleaes Check Console!')
+    console.log(response)
   }
 
   static renderBaseHTML() {
