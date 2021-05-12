@@ -42,3 +42,4 @@ yarn-debug.log*
 # Ignore credentials
 /config/application.yml
 /config/gcloud.json
+/config/webpack/.env

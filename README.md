@@ -7,23 +7,26 @@ Consider checking the repo's issues, all of my todos are in there :smile:
 ## Setup Locally
 
 * Environment Variables
-  * PAYMONGO_PK
-  * PAYMONGO_SK
-  * GLCOUD_BUCKET_NAME
-  * GCLOUD_PROJECT_ID
-  * GCLOUD_PRIVATE_KEY_ID
-  * GCLOUD_PRIVATE_KEY
-  * GCLOUD_CLIENT_EMAIL
-  * GCLOUD_CLIENT_ID
-  * GCLOUD_AUTH_URI
-  * GCLOUD_TOKEN_URI
-  * GCLOUD_AUTH_PROVIDER_X509
-  * GCLOUD_CLIENT_X509
-  * MAILTRAP_USERNAME
-  * MAILTRAP_PASSWORD
-  * MAILTRAP_ADDRESS
-  * MAILTRAP_DOMAIN
-  * MAILTRAP_PORT
+  * Rails (```config/application.yml```)
+    * PAYMONGO_PK
+    * PAYMONGO_SK
+    * GLCOUD_BUCKET_NAME
+    * GCLOUD_PROJECT_ID
+    * GCLOUD_PRIVATE_KEY_ID
+    * GCLOUD_PRIVATE_KEY
+    * GCLOUD_CLIENT_EMAIL
+    * GCLOUD_CLIENT_ID
+    * GCLOUD_AUTH_URI
+    * GCLOUD_TOKEN_URI
+    * GCLOUD_AUTH_PROVIDER_X509
+    * GCLOUD_CLIENT_X509
+    * MAILTRAP_USERNAME
+    * MAILTRAP_PASSWORD
+    * MAILTRAP_ADDRESS
+    * MAILTRAP_DOMAIN
+    * MAILTRAP_PORT
+  * Webpacker (```config/webpack/.env```)
+    * PAYMONGO_PK
 
 * Paymongo
   * Sign up and get API Keys https://dashboard.paymongo.com/signup

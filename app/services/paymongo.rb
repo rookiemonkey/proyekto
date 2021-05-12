@@ -1,4 +1,4 @@
-# https://developers.paymongo.com/docs/accepting-cards4
+# https://developers.paymongo.com/docs/accepting-cards
 # payment_method_id is default for 'card'
 
 class Paymongo
