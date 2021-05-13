@@ -1,0 +1,23 @@
+<div id="plan" class="modal">
+  <div class="modal-background jb-modal-close"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Organization Plan Management</p>
+        <button class="delete jb-modal-close" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body" id="plan-body">
+        <p>You are currently on <strong><%= current_tenant.plan.upcase %></strong> Plan</p> <br/>
+
+        <div id="plan-screen"></div>
+      </section>
+      <footer class="modal-card-foot" id="plan-footer">
+        <button type="button" class="button jb-modal-close">Cancel</button>
+      </footer>
+    </div>
+  <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
+</div>
+
+<script>
+  window.availablePlans = '<%== JSON.generate(available_plans) %>'
+  window.availablePaymentMethods = '<%== JSON.generate(available_payment_methods) %>'
+</script>
