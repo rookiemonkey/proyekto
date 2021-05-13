@@ -79,7 +79,7 @@ export default class Paymongo {
 
   static renderBaseHTML() {
     MultiStepForm.screen.insertAdjacentHTML('beforeend', `
-      <form id="card_information_form">
+      <form id="paymongo_card_information_form">
         <div class="field is-horizontal"> 
           <div class="field-label is-normal">
             <label class="label">Card Number</label>
@@ -87,7 +87,7 @@ export default class Paymongo {
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="text" name="card_number" />
+                <input type="text" class="input" name="card_number" />
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ export default class Paymongo {
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="number" name="exp_month" />
+                <input type="number" class="input" name="exp_month" />
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default class Paymongo {
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="number" name="exp_year" />
+                <input type="number" class="input" name="exp_year" />
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default class Paymongo {
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="text" name="cvc" />
+                <input type="text" class="input" name="cvc" />
               </div>
             </div>
           </div>
@@ -134,14 +134,13 @@ export default class Paymongo {
 
         <div class="field is-horizontal">
           <div class="field-label is-normal">
-            <button type="submit">SUBMIT</button>
+            <button type="submit" class="button is-success">SUBMIT</button>
           </div>
         </div>
       </form>
 
-      <div>
-        <p>Powered by:</p>
-        <img src="${MultiStepForm.paymentMethods[MultiStepForm.state.chosen_payment_method]['image']}" />
+      <div class="powered_by">
+        <p>Powered by: <img src="${MultiStepForm.paymentMethods[MultiStepForm.state.chosen_payment_method]['image']}" /></p>
       </div>
     `)
   }

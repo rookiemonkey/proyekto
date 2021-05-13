@@ -1,0 +1,8 @@
+.payment-method-list {
+  display: flex;
+
+  li.payment-method-list-item {
+    width: 25%;
+    cursor: pointer;
+  }
+}
