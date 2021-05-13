@@ -18,6 +18,7 @@
 </div>
 
 <script>
+  window.currentPlan = '<%= current_tenant.plan %>'
   window.availablePlans = '<%== JSON.generate(available_plans) %>'
   window.availablePaymentMethods = '<%== JSON.generate(available_payment_methods) %>'
 </script>
