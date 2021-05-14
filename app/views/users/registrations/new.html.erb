@@ -1,39 +1,72 @@
-<h2>Sign up</h2>
+<section class="section hero is-fullheight is-error-section signup-section">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-fifths">
+          <div class="card has-card-header-background">
+            <header class="card-header">
+              <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
+            </header>
+            <div class="card-content">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
+                <div class="field">
+                  <label class="label">E-mail Address</label>
+                  <div class="control">
+                    <%= f.email_field :email, class: 'input', autofocus: true, autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label">Full Name</label>
+                  <div class="control">
+                    <%= f.text_field :full_name, class: 'input', autofocus: true, autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label">Organization</label>
+                  <div class="control">
+                    <%= f.text_field :organization,  class: 'input', autofocus: true, autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label">Password</label>
+                  <div class="control">
+                      <%= f.password_field :password, class: 'input', autocomplete: "off" %>
+                  </div>
+                  <% if @minimum_password_length %>
+                    <p class="help"><%= @minimum_password_length %> characters minimum</p>
+                  <% end %>
+                </div>
+
+                <div class="field">
+                  <label class="label">Password Confirmation</label>
+                  <div class="control">
+                    <%= f.password_field :password_confirmation, class: 'input', autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <hr>
+                <div class="field is-grouped">
+                  <%= f.submit "Signup", class: "button is-white is-fullwidth" %>
+                </div>
+
+                <div class="field is-grouped shared-links">
+                  <%= render "users/shared/links" %>
+                </div>
+
+              <% end %>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :full_name %><br />
-    <%= f.text_field :full_name, autofocus: true, autocomplete: "off" %>
+  <div class="hero-foot has-text-centered">
+    <div class="logo"></div>
   </div>
-
-  <div class="field">
-    <%= f.label :organization %><br />
-    <%= f.text_field :organization, autofocus: true, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</section>

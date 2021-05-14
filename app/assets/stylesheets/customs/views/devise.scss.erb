@@ -1,0 +1,42 @@
+.signin-section {
+  background-image: url(<%= asset_path('bg_signin.png') %>) !important;
+}
+
+.signup-section {
+  background-image: url(<%= asset_path('bg_signup.png') %>) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-blend-mode: overlay;
+}
+
+.signin-section .card,
+.signin-section .card .card-header,
+.signup-section .card,
+.signup-section .card .card-header {
+  background-color: transparent !important;
+}
+
+.signin-section .card .card-header,
+.signup-section .card .card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signin-section form label,
+.signup-section form label,
+.signin-section p.help,
+.signup-section p.help {
+  color: white;
+}
+
+.signin-section form input,
+.signup-section form input {
+  background-color: transparent;
+  color: white;
+}
+
+.signin-section form .shared-links,
+.signup-section form .shared-links {
+  display: flex;
+  justify-content: center;
+}
