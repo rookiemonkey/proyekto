@@ -8,15 +8,29 @@
   background-blend-mode: overlay;
 }
 
+.password-reset-section {
+  background-image: url(<%= asset_path('bg_password_reset.png') %>) !important;
+}
+
+.password-new-section {
+  background-image: url(<%= asset_path('bg_password_new.png') %>) !important;
+}
+
 .signin-section .card,
 .signin-section .card .card-header,
 .signup-section .card,
-.signup-section .card .card-header {
+.signup-section .card .card-header,
+.password-reset-section .card,
+.password-reset-section .card .card-header,
+.password-new-section .card,
+.password-new-section .card .card-header {
   background-color: transparent !important;
 }
 
 .signin-section .card .card-header,
-.signup-section .card .card-header {
+.signup-section .card .card-header,
+.password-reset-section .card .card-header,
+.password-new-section .card .card-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,19 +38,27 @@
 
 .signin-section form label,
 .signup-section form label,
+.password-reset-section form label,
+.password-new-section form label,
 .signin-section p.help,
-.signup-section p.help {
+.signup-section p.help,
+.password-reset-section p.help,
+.password-new-section p.help {
   color: white;
 }
 
 .signin-section form input,
-.signup-section form input {
+.signup-section form input,
+.password-reset-section form input,
+.password-new-section form input {
   background-color: transparent;
   color: white;
 }
 
 .signin-section form .shared-links,
-.signup-section form .shared-links {
+.signup-section form .shared-links,
+.password-reset-section form .shared-links,
+.password-new-section form .shared-links {
   display: flex;
   justify-content: center;
 }

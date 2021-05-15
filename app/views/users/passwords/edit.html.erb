@@ -1,0 +1,53 @@
+<section class="section hero is-fullheight is-error-section password-new-section">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-fifths">
+          <div class="card has-card-header-background">
+            <header class="card-header">
+              <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
+            </header>
+            <div class="card-content">
+
+              <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+
+                <%= f.hidden_field :reset_password_token %>
+
+                <div class="field">
+                  <label class="label">New Password</label>
+                  <div class="control">
+                      <%= f.password_field :password, class: 'input', autocomplete: "off" %>
+                  </div>
+                  <% if @minimum_password_length %>
+                    <p class="help"><%= @minimum_password_length %> characters minimum</p>
+                  <% end %>
+                </div>
+
+                <div class="field">
+                  <label class="label">New Password Confirmation</label>
+                  <div class="control">
+                    <%= f.password_field :password_confirmation, class: 'input', autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <hr>
+                <div class="field is-grouped">
+                  <%= f.submit "Change Password", class: "button is-white is-fullwidth" %>
+                </div>
+
+                <div class="field is-grouped shared-links">
+                  <%= render "users/shared/links" %>
+                </div>
+
+              <% end %>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-foot has-text-centered">
+    <div class="logo"></div>
+  </div>
+</section>
