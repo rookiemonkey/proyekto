@@ -7,6 +7,11 @@
   border-radius: 35px;
 }
 
+@mixin position-floater($left, $bottom) {
+  left: $left;
+  bottom: -($bottom * 2);
+}
+
 main.home {
   background-color: #4a4a4a;
   min-height: 100vh;
@@ -203,5 +208,45 @@ main.home {
     ul.plans-list li.plans-list-item div ul.details-list li.details-list-item::before {
       content: '✔ ';
     }
+  }
+
+
+  // floaters
+  section.feature-one .left h2,
+  section.feature-one .left p,
+  section.feature-one .right img,
+  section.feature-two .right h2,
+  section.feature-two .right p,
+  section.feature-two .left img {
+    z-index: 2;
+  }
+
+  .floater {
+    position: absolute;
+    width: 60px;
+  }
+
+  .floater-one {
+    @include position-floater(25%, 5%);
+  }
+
+  .floater-two {
+    @include position-floater(60%, 25%);
+  }
+
+  .floater-three {
+    @include position-floater(85%, 40%);
+  }
+
+  .floater-four {
+    @include position-floater(5%, 30%);
+  }
+
+  .floater-five {
+    @include position-floater(45%, 42%);
+  }
+
+  .floater-six {
+    @include position-floater(80%, 22%);
   }
 }

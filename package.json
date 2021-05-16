@@ -8,6 +8,7 @@
     "@rails/webpacker": "5.2.1",
     "aos": "^3.0.0-beta.6",
     "dotenv": "^9.0.2",
+    "rellax": "^1.12.1",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
