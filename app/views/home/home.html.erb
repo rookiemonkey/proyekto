@@ -1,1 +1,75 @@
-<h1>THIS IS THE LANDING PAGE</h1>
+<main class="home">
+  <nav>
+    <div class="left">
+      <%= image_tag asset_path('proyekto.png'), 'style': 'width: 25%' %>
+    </div>
+
+    <ul class="right">
+      <li>
+        <%= link_to 'Signin', new_user_session_path %>
+      </li>
+      <li>
+        <%= link_to 'Signup', new_user_registration_path %>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="left">
+      <%= image_tag asset_path('home_hero.svg') %>
+    </div>
+
+    <div class="right">
+      <%= image_tag asset_path('proyekto.png'), 'style': 'width: 50%', data: { aos: 'fade-left', 'aos-delay': '500' } %>
+      <h2 data-aos="fade-left" data-aos-delay="800">A Modern approach for your organization's projects!</h2>
+      <%= link_to 'Get Started Now!', new_user_registration_path, data: { aos: 'fade-left', 'aos-delay': '1100' } %>
+    </div>
+  </section>
+
+  <section class="feature-one">
+    <div class="left">
+      <h2 data-aos="fade-right" data-aos-delay="500">Work with your team</h2>
+      <p data-aos="fade-right" data-aos-delay="750">Getting the task done by yourself is hard. Proyekto allows you to work with your teammates and get the task done ASAP!</p>
+    </div>
+
+    <div class="right">
+      <%= image_tag asset_path('feature-one.svg') %>
+    </div>
+  </section>
+
+  <section class="feature-two">
+    <div class="left">
+      <%= image_tag asset_path('feature-two.svg') %>
+    </div>
+
+    <div class="right">
+      <h2 data-aos="fade-left" data-aos-delay="500">Visualize your tasks</h2>
+      <p data-aos="fade-left" data-aos-delay="750">Proyeto allows images upload so you and your team can visualize what needs to be the output of each task.</p>
+    </div>
+  </section>
+
+  <section class="plans">
+    <h2 data-aos="fade-up">Plan Options</h2>
+
+    <ul class="plans-list">
+      <% available_plans.each_value do |plan| %>
+        <li class="plans-list-item">
+          <img src="/images/plan_<%= plan[:name] %>.png" alt="<%= plan[:name] %>" data-aos="fade-up" />
+
+          <div>
+            <h3 data-aos="fade-up"><%= plan[:name].capitalize %></h3>
+            <p data-aos="fade-up">P <%= plan[:price] %></p>
+
+            <ul class="details-list">
+              <% plan[:project_details].each_with_index do |detail, index| %>
+                <li class="details-list-item" data-aos="fade-left" data-aos-delay="<%= (index+1) * 200  %>">
+                  <%= detail %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</main>

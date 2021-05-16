@@ -4,9 +4,11 @@
       <div class="columns is-centered">
         <div class="column is-two-fifths">
           <div class="card has-card-header-background">
-            <header class="card-header">
-              <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
-            </header>
+            <a href="<%= root_path %>">
+              <header class="card-header">
+                <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
+              </header>
+            </a>
             <div class="card-content">
 
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

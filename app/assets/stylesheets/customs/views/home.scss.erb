@@ -1,0 +1,207 @@
+@mixin section-padding-desktop {
+  padding: 2.5% 10% 5% 10%;
+}
+
+@mixin button-padding-desktop {
+  padding: 2.5% 5%;
+  border-radius: 35px;
+}
+
+main.home {
+  background-color: #4a4a4a;
+  min-height: 100vh;
+  background-image: url(<%= asset_path('bg_home_hero.png') %>);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
+
+  // navigation bar
+  nav {
+    display: flex;
+    justify-content: space-between;
+    @include section-padding-desktop;
+
+    .left,
+    .right {
+      display: flex;
+    }
+
+    .left {
+      justify-content: flex-start;
+    }
+
+    .right {
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .right li,
+    .right li a {
+      color: white;
+      font-weight: 700;
+      min-width: 75px;
+    }
+  }
+
+
+  // sections with 2 columns
+  section.hero,
+  section.feature-one,
+  section.feature-two {
+
+    .left,
+    .right {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+
+  // hero banner
+  section.hero {
+    display: flex;
+    flex-direction: row;
+    @include section-padding-desktop;
+
+    .left img {
+      width: 75%;
+    }
+
+    .right {
+      flex-direction: column;
+      align-items: flex-start;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .right a {
+      color: #4a4a4a;
+      background-color: white;
+      font-weight: 700;
+      @include button-padding-desktop;
+    }
+  }
+
+
+  // feature-one banner
+  section.feature-one {
+    display: flex;
+    flex-direction: row;
+    @include section-padding-desktop;
+
+    .right img {
+      width: 75%;
+    }
+
+    .left {
+      flex-direction: column;
+      align-items: flex-start;
+      color: white;
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+
+  // feature-two banner
+  section.feature-two {
+    display: flex;
+    flex-direction: row;
+    @include section-padding-desktop;
+
+    .left img {
+      width: 75%;
+    }
+
+    .right {
+      flex-direction: column;
+      align-items: flex-start;
+      color: white;
+
+      h2 {
+        font-size: 2.5rem;
+      }
+
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+
+  // plan banner
+  section.plans {
+    display: flex;
+    flex-direction: column;
+    @include section-padding-desktop;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2.5%;
+      color: white;
+    }
+
+    ul.plans-list,
+    ul.plans-list li.plans-list-item {
+      display: flex;
+      color: #4a4a4a;
+    }
+
+    ul.plans-list li.plans-list-item {
+      flex-direction: column;
+      align-items: center;
+      padding: 5% 0;
+      margin: 0 2.5%;
+      cursor: pointer;
+      border-radius: 35px;
+      background-color: white;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: box-shadow, transform;
+      transition-property: box-shadow, transform;
+    }
+
+    ul.plans-list li.plans-list-item:hover,
+    ul.plans-list li.plans-list-item:active,
+    ul.plans-list li.plans-list-item:focus {
+      box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+
+    ul.plans-list li.plans-list-item img {
+      width: 75%;
+    }
+
+    ul.plans-list li.plans-list-item div {
+      padding: 5% 0;
+    }
+
+    ul.plans-list li.plans-list-item div h3,
+    ul.plans-list li.plans-list-item div p {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    ul.plans-list li.plans-list-item div p {
+      font-size: 1rem;
+    }
+
+    ul.plans-list li.plans-list-item div ul.details-list {
+      margin-top: 5%;
+    }
+
+    ul.plans-list li.plans-list-item div ul.details-list li.details-list-item::before {
+      content: '✔ ';
+    }
+  }
+}
