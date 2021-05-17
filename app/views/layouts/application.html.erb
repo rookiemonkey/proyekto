@@ -5,22 +5,6 @@
   </head>
 
   <body>
-
-    <% if notice %>
-      <div class="alert alert-primary alert-dismissible fade show mx-auto mt-5" role="alert" style="width: 80%">
-        <p class="notice"><%= notice %></p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    <% end %>
-    
-    <% if alert %>
-      <div class="alert alert-danger mx-auto mt-5" role="alert" style="width: 80%">
-        <p class="alert"><%= alert %></p>
-      </div>
-    <% end %>
-  
     <%= render 'components/navigation' %>
     <%= render 'components/sidebar' %>
     <%= yield %>
@@ -30,14 +14,21 @@
     <%= render 'components/modal_project_new' %>
     <%= render 'components/modal_colleague_new' %>
     <%= render 'components/modal_plan' %>
-
   </body>
 
   <%= javascript_pack_tag 'main', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'toast', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'chart', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'chart_sample', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'payment_adapter', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'multi_step_form', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'aos', 'data-turbolinks-track': 'reload' %>
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+
+  <script>
+    window.notification = new window.HTMLElementToaster()
+    window.notification.initialize()
+    <% if notice %>window.notification.showMessage(`<%= notice %>`, 'success');<% end %>
+    <% if alert %>window.notification.showMessage(`<%= notice %>`, 'error');<% end %>
+  </script>
 </html>
