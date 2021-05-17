@@ -165,21 +165,8 @@ main.home {
       align-items: center;
       padding: 5% 0;
       margin: 0 2.5%;
-      cursor: pointer;
       border-radius: 35px;
       background-color: white;
-      -webkit-transition-duration: 0.3s;
-      transition-duration: 0.3s;
-      -webkit-transition-property: box-shadow, transform;
-      transition-property: box-shadow, transform;
-    }
-
-    ul.plans-list li.plans-list-item:hover,
-    ul.plans-list li.plans-list-item:active,
-    ul.plans-list li.plans-list-item:focus {
-      box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-      -webkit-transform: scale(1.1);
-      transform: scale(1.1);
     }
 
     ul.plans-list li.plans-list-item img {
@@ -211,13 +198,27 @@ main.home {
   }
 
 
+  // footer
+  footer {
+    display: flex;
+    justify-content: center;
+    @include section-padding-desktop;
+
+    h3 {
+      color: white;
+      font-weight: 700;
+    }
+  }
+
+
   // floaters
   section.feature-one .left h2,
   section.feature-one .left p,
   section.feature-one .right img,
   section.feature-two .right h2,
   section.feature-two .right p,
-  section.feature-two .left img {
+  section.feature-two .left img,
+  section.plans h2 {
     z-index: 2;
   }
 
