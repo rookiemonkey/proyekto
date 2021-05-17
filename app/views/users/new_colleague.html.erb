@@ -1,19 +1,51 @@
-<%= form_with method: :put do |form| %>
-  <div>
-    <%= form.label 'New Password' %>
-    <%= form.password_field :'colleague[invite_new_password]' %>
-  </div>
+<section class="section hero is-fullheight is-error-section signup-section">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-two-fifths">
+          <div class="card has-card-header-background">
+            <a href="<%= root_path %>">
+              <header class="card-header">
+                <%= image_tag asset_path('proyekto.png'), 'style': 'width: 60%' %>
+              </header>
+            </a>
+            <div class="card-content">
 
-  <div>
-    <%= form.label 'Confirm New Password' %>
-    <%= form.password_field :'colleague[invite_new_password_confirm]' %>
-  </div>
+              <%= form_with method: :put do |f| %>
 
-  <div style="display: none;">
-    <%= form.text_field 'invitation_id', value: @invited_colleague.invitation_id %>
-  </div>
+                <div class="field">
+                  <label class="label">New Password</label>
+                  <div class="control">
+                    <%= f.password_field :'colleague[invite_new_password_confirm]', class: 'input', autofocus: true, autocomplete: "off" %>
+                  </div>
+                  <p class="help">6 characters minimum</p>
+                </div>
 
-  <div>
-    <%= form.submit 'Accept' %>
+                <div class="field">
+                  <label class="label">Confirm New Password</label>
+                  <div class="control">
+                    <%= f.password_field :'colleague[invite_new_password_confirm]', class: 'input', autofocus: true, autocomplete: "off" %>
+                  </div>
+                </div>
+
+                <div class="field" style="display: none;">
+                  <%= f.text_field 'invitation_id', value: @invited_colleague.invitation_id %>
+                </div>
+
+                <hr>
+                <div class="field is-grouped">
+                  <%= f.submit "Accept Invitation", class: "button is-white is-fullwidth" %>
+                </div>
+
+              <% end %>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+  <div class="hero-foot has-text-centered">
+    <div class="logo"></div>
+  </div>
+</section>
