@@ -20,7 +20,7 @@ RSpec.describe 'ArtifactController.create', type: :request do
     end
 
     it 'creates a single artifact' do
-      expect { post_request }.to change { Artifact.all.length }.by(1)
+      expect { post_request }.to change(Artifact, :count).by(1)
     end
   end
 
@@ -86,6 +86,21 @@ RSpec.describe 'ArtifactController.create', type: :request do
     end
 
     it 'does\'nt create an artifact' do
+      expect { post_request }.not_to change(Artifact, :count)
+    end
+  end
+
+  describe 'w/o auth' do
+    let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
+
+    before { sign_out(user) }
+
+    it 'returns http redirect to login' do
+      post_request
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'doesn\'t create a new artifact' do
       expect { post_request }.not_to change(Artifact, :count)
     end
   end

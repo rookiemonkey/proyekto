@@ -40,4 +40,19 @@ RSpec.describe 'ArtifactController.delete', type: :request do
       expect(response.body).to include('Resource not found')
     end
   end
+
+  describe 'w/o auth' do
+    let(:delete_request) { delete organization_project_artifact_delete_path(project, artifact) }
+
+    before { sign_out(user) }
+
+    it 'returns http redirect to login' do
+      delete_request
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'doesn\'t delete the artifact' do
+      expect { delete_request }.not_to change(Artifact, :count)
+    end
+  end
 end
