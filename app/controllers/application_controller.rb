@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include Exceptions::ApplicationErrors
-  rescue_from UploadError, with: :handle_upload_error
+  rescue_from ActiveRecord::RecordNotFound, with: :to_redirect_back_not_found
+  rescue_from Pagy::OverflowError, with: :page_overflow
+  rescue_from UploadError, with: :to_redirect_back
+  rescue_from ResourceError, with: :to_redirect_back
 
   set_current_tenant_through_filter
   protect_from_forgery with: :exception
@@ -16,6 +19,10 @@ class ApplicationController < ActionController::Base
     @artifacts = @project.artifacts
   end
 
+  def get_error_for(resource)
+    resource.errors.full_messages.first
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -28,8 +35,18 @@ class ApplicationController < ActionController::Base
     set_current_tenant(Organization.find(current_user.organization.id)) if current_user
   end
 
-  def handle_upload_error(error)
+  def to_redirect_back(error)
     flash[:alert] = error.message
+    redirect_back(fallback_location: organization_dashboard_path)
+  end
+
+  def to_redirect_back_not_found
+    flash[:alert] = 'Resource not found'
+    redirect_back(fallback_location: organization_dashboard_path)
+  end
+
+  def page_overflow
+    flash[:notice] = 'You\'ve reached the last page'
     redirect_back(fallback_location: organization_dashboard_path)
   end
 end

@@ -12,4 +12,11 @@
   <%= javascript_pack_tag 'toast', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'aos', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'rellax', 'data-turbolinks-track': 'reload' %>
+
+  <script>
+    window.notification = new window.HTMLElementToaster()
+    window.notification.initialize()
+    <% if notice %>window.notification.showMessage(`<%= notice %>`, 'success');<% end %>
+    <% if alert %>window.notification.showMessage(`<%= alert %>`, 'error');<% end %>
+  </script>
 </html>

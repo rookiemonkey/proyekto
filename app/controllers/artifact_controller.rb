@@ -12,14 +12,17 @@ class ArtifactController < ApplicationController
   def create
     upload_details = { image_url: nil, image_name: nil }
     upload_details = Gcloud.upload(artifact_image.tempfile.path, artifact_image_name) if artifact_image
-    Artifact.create(**artifact_params, **upload_details, project_id: params[:pid])
+    created_artifact = Artifact.create(**artifact_params, **upload_details, project_id: params[:pid])
+    raise ResourceError.new(message: get_error_for(created_artifact)) unless created_artifact.valid?
+
     redirect_back(fallback_location: organization_dashboard_path)
   end
 
   def update
     upload_details = {}
     upload_details = Gcloud.upload(artifact_image.tempfile.path, @artifact.image_name || artifact_image_name) if artifact_image
-    @artifact.update(**artifact_params, **upload_details)
+    raise ResourceError.new(message: get_error_for(@artifact)) unless @artifact.update(**artifact_params, **upload_details)
+
     redirect_back(fallback_location: organization_dashboard_path)
   end
 

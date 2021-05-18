@@ -29,6 +29,6 @@
     window.notification = new window.HTMLElementToaster()
     window.notification.initialize()
     <% if notice %>window.notification.showMessage(`<%= notice %>`, 'success');<% end %>
-    <% if alert %>window.notification.showMessage(`<%= notice %>`, 'error');<% end %>
+    <% if alert %>window.notification.showMessage(`<%= alert %>`, 'error');<% end %>
   </script>
 </html>
