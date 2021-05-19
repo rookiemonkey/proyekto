@@ -1,5 +1,7 @@
 class ColleagueController < ApplicationController
   layout 'landing'
+  before_action :authenticate_user!, only: %i[create]
+  before_action :redirect_if_logged_in, except: %i[create]
   before_action :find_invited_colleague, only: %i[new accept decline]
 
   def new
@@ -8,14 +10,21 @@ class ColleagueController < ApplicationController
 
   def create
     invited_colleague = User.create(**colleague_params, **colleague_default_params)
+    raise ResourceError.new(message: get_error_for(invited_colleague)) unless invited_colleague.valid?
+
     ColleagueMailer.with(colleague: invited_colleague).invitation_email.deliver_later
     redirect_back(fallback_location: organization_dashboard_path)
   end
 
   def accept
+    redirect_path = "#{request.url}?invitation_id=#{params[:invitation_id]}"
+    raise ResourceError.new(message: 'Password does\'nt match', path: redirect_path) unless passwords_match
+
     @invited_colleague.password = colleague_params[:invite_new_password]
     @invited_colleague.invitation_id = nil
     @invited_colleague.save
+    raise ResourceError.new(message: get_error_for(@invited_colleague), path: redirect_path) unless @invited_colleague.valid?
+
     redirect_to(new_user_session_path)
   end
 
@@ -36,5 +45,10 @@ class ColleagueController < ApplicationController
 
   def find_invited_colleague
     @invited_colleague = User.find_by(invitation_id: params[:invitation_id])
+    raise ResourceError.new(message: 'Resource not found', path: new_user_session_path) unless @invited_colleague
+  end
+
+  def passwords_match
+    colleague_params[:invite_new_password] == colleague_params[:invite_new_password_confirm]
   end
 end

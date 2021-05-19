@@ -11,6 +11,23 @@ RSpec.describe 'ArtifactController.update', type: :request do
     create_list(:artifact, 10, project: project, organization: user.organization)
   end
 
+  describe 'w/o auth' do
+    let(:params) { { name: 'New Name', description: 'New Description' } }
+    let(:put_request) { put organization_project_artifact_update_path(project, artifact), params: { artifact: params } }
+
+    before { sign_out(user) }
+
+    it 'returns http redirect to login' do
+      put_request
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'doesn\'t update the artifact attributes' do
+      artifact.reload
+      expect(artifact.name).not_to eq(params[:name])
+    end
+  end
+
   describe 'PUT /projects/:pid/artifacts/:aid' do
     let(:params) { { name: 'New Name', description: 'New Description' } }
 
@@ -55,23 +72,6 @@ RSpec.describe 'ArtifactController.update', type: :request do
     it 'shows an error message' do
       follow_redirect!
       expect(response.body).to include('Name can&#39;t be blank')
-    end
-  end
-
-  describe 'w/o auth' do
-    let(:params) { { name: 'New Name', description: 'New Description' } }
-    let(:put_request) { put organization_project_artifact_update_path(project, artifact), params: { artifact: params } }
-
-    before { sign_out(user) }
-
-    it 'returns http redirect to login' do
-      put_request
-      expect(response).to redirect_to(new_user_session_path)
-    end
-
-    it 'doesn\'t update the artifact attributes' do
-      artifact.reload
-      expect(artifact.name).not_to eq(params[:name])
     end
   end
 end

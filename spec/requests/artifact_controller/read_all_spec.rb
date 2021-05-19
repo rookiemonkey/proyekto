@@ -11,6 +11,17 @@ RSpec.describe 'ArtifactController.read_all', type: :request do
     create_list(:artifact, 10, project: project, organization: user.organization)
   end
 
+  describe 'w/o auth' do
+    let(:get_request) { get organization_project_artifacts_path(project) }
+
+    before { sign_out(user) }
+
+    it 'returns http redirect to login' do
+      get_request
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
   describe 'GET /projects/:pid/artifacts' do
     before { get organization_project_artifacts_path(project) }
 
@@ -37,17 +48,6 @@ RSpec.describe 'ArtifactController.read_all', type: :request do
     it 'shows an error message' do
       follow_redirect!
       expect(response.body).to include('You&#39;ve reached the last page')
-    end
-  end
-
-  describe 'w/o auth' do
-    let(:get_request) { get organization_project_artifacts_path(project) }
-
-    before { sign_out(user) }
-
-    it 'returns http redirect to login' do
-      get_request
-      expect(response).to redirect_to(new_user_session_path)
     end
   end
 end

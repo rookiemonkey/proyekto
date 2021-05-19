@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include Exceptions::ApplicationErrors
   rescue_from ActiveRecord::RecordNotFound, with: :to_redirect_back_not_found
   rescue_from Pagy::OverflowError, with: :page_overflow
+  rescue_from IsAlreadyLoggedInError, with: :to_redirect_back
   rescue_from UploadError, with: :to_redirect_back
   rescue_from ResourceError, with: :to_redirect_back
 
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
     resource.errors.full_messages.first
   end
 
+  def redirect_if_logged_in
+    raise IsAlreadyLoggedInError.new(message: 'Oh no!') if user_signed_in?
+  end
+
   protected
 
   def configure_permitted_parameters
@@ -37,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   def to_redirect_back(error)
     flash[:alert] = error.message
-    redirect_back(fallback_location: organization_dashboard_path)
+    redirect_back(fallback_location: error.path.nil? ? organization_dashboard_path : error.path)
   end
 
   def to_redirect_back_not_found

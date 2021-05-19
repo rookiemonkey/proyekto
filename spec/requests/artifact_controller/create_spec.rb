@@ -11,6 +11,21 @@ RSpec.describe 'ArtifactController.create', type: :request do
     create_list(:artifact, 10, project: project, organization: user.organization)
   end
 
+  describe 'w/o auth' do
+    let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
+
+    before { sign_out(user) }
+
+    it 'returns http redirect to login' do
+      post_request
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'doesn\'t create a new artifact' do
+      expect { post_request }.not_to change(Artifact, :count)
+    end
+  end
+
   describe 'POST /projects/:pid/artifacts/new' do
     let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
 
@@ -25,20 +40,22 @@ RSpec.describe 'ArtifactController.create', type: :request do
   end
 
   describe 'incorrect details (eg: name)' do
-    let(:attributes_for_artifact) { attributes_for(:artifact) }
-
-    before do
-      attributes_for_artifact[:name] = nil
-      post new_organization_project_artifact_path(project), params: { artifact: attributes_for_artifact }
-    end
+    let(:params) { attributes_for(:artifact) }
+    let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: { **params, name: nil } } }
 
     it 'returns http redirect to fallback (dashboard)' do
+      post_request
       expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'shows an error message' do
+      post_request
       follow_redirect!
       expect(response.body).to include('Name can&#39;t be blank')
+    end
+
+    it 'does\'nt create an artifact' do
+      expect { post_request }.not_to change(Artifact, :count)
     end
   end
 
@@ -86,21 +103,6 @@ RSpec.describe 'ArtifactController.create', type: :request do
     end
 
     it 'does\'nt create an artifact' do
-      expect { post_request }.not_to change(Artifact, :count)
-    end
-  end
-
-  describe 'w/o auth' do
-    let(:post_request) { post new_organization_project_artifact_path(project), params: { artifact: attributes_for(:artifact) } }
-
-    before { sign_out(user) }
-
-    it 'returns http redirect to login' do
-      post_request
-      expect(response).to redirect_to(new_user_session_path)
-    end
-
-    it 'doesn\'t create a new artifact' do
       expect { post_request }.not_to change(Artifact, :count)
     end
   end
