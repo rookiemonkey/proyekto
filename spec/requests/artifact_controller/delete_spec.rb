@@ -44,15 +44,21 @@ RSpec.describe 'ArtifactController.delete', type: :request do
   end
 
   describe 'resource does\'nt exist' do
-    before { delete organization_project_artifact_delete_path(project, 99_999) }
+    subject(:delete_request_fail) { delete organization_project_artifact_delete_path(project, 99_999) }
 
     it 'returns http redirect to fallback (dashboard)' do
+      delete_request_fail
       expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'shows an error message' do
+      delete_request_fail
       follow_redirect!
       expect(response.body).to include('Resource not found')
+    end
+
+    it 'doesn\'t delete the artifact' do
+      expect { delete_request_fail }.not_to change(Artifact, :count)
     end
   end
 end

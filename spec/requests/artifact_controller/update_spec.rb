@@ -22,6 +22,12 @@ RSpec.describe 'ArtifactController.update', type: :request do
       expect(response).to redirect_to(new_user_session_path)
     end
 
+    it 'shows an error' do
+      put_request
+      follow_redirect!
+      expect(response.body).to include('You need to sign in or sign up before continuing')
+    end
+
     it 'doesn\'t update the artifact attributes' do
       artifact.reload
       expect(artifact.name).not_to eq(params[:name])
@@ -72,6 +78,11 @@ RSpec.describe 'ArtifactController.update', type: :request do
     it 'shows an error message' do
       follow_redirect!
       expect(response.body).to include('Name can&#39;t be blank')
+    end
+
+    it 'doesn\'t update the artifact attributes' do
+      artifact.reload
+      expect(artifact.name).not_to eq(nil)
     end
   end
 end

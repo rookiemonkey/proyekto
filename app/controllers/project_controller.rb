@@ -8,12 +8,15 @@ class ProjectController < ApplicationController
   end
 
   def create
-    Project.create(project_params)
+    created_project = Project.create(project_params)
+    raise ResourceError.new(message: get_error_for(created_project)) unless created_project.valid?
+
     redirect_to(organization_projects_path)
   end
 
   def update
-    @project.update(project_params)
+    raise ResourceError.new(message: get_error_for(@project)) unless @project.update(project_params)
+
     redirect_back(fallback_location: organization_dashboard_path)
   end
 
