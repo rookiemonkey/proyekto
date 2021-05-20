@@ -36,6 +36,12 @@ RSpec.describe 'ColleagueController.create', type: :request do
       post_request
       expect(User.last.invitation_id.nil?).to eq(false)
     end
+
+    it 'shows a success message' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('Invitation Email successfully sent to colleague!')
+    end
   end
 
   describe 'incorrect details (eg: full_name)' do

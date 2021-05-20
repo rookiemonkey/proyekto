@@ -11,18 +11,18 @@ class ProjectController < ApplicationController
     created_project = Project.create(project_params)
     raise ResourceError.new(message: get_error_for(created_project)) unless created_project.valid?
 
-    redirect_to(organization_projects_path)
+    redirect_success('Project successfully created!', organization_projects_path)
   end
 
   def update
     raise ResourceError.new(message: get_error_for(@project)) unless @project.update(project_params)
 
-    redirect_back(fallback_location: organization_dashboard_path)
+    redirect_back_success('Project successfully updated!')
   end
 
   def delete
     @project.destroy
-    redirect_back(fallback_location: organization_dashboard_path)
+    redirect_back_success('Project successfully deleted!')
   end
 
   private

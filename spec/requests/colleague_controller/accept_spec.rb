@@ -42,6 +42,11 @@ RSpec.describe 'ColleagueController.accept', type: :request do
     it 'updates the password' do
       expect(User.last.valid_password?(params[:invite_new_password])).to eq(true)
     end
+
+    it 'shows a success message' do
+      follow_redirect!
+      expect(response.body).to include('Successfully created your account! Please login to continue')
+    end
   end
 
   describe 'invitation id that is not existing' do

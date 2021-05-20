@@ -35,6 +35,12 @@ RSpec.describe 'ProjectController.delete', type: :request do
     it 'deletes a single project' do
       expect { delete_request }.to change { Project.all.length }.by(-1)
     end
+
+    it 'shows a success message' do
+      delete_request
+      follow_redirect!
+      expect(response.body).to include('Project successfully deleted!')
+    end
   end
 
   describe 'resource does\'nt exist' do

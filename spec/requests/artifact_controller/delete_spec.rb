@@ -24,6 +24,12 @@ RSpec.describe 'ArtifactController.delete', type: :request do
     it 'doesn\'t delete the artifact' do
       expect { delete_request }.not_to change(Artifact, :count)
     end
+
+    it 'shows an error message' do
+      delete_request
+      follow_redirect!
+      expect(response.body).to include('You need to sign in or sign up before continuing')
+    end
   end
 
   describe 'DELETE /projects/:pid/artifacts/:aid' do
@@ -40,6 +46,12 @@ RSpec.describe 'ArtifactController.delete', type: :request do
 
     it 'deletes the image on google cloud storage' do
       expect(Gcloud.get(artifact.image_name)).to eq(nil)
+    end
+
+    it 'shows a success message' do
+      delete_request
+      follow_redirect!
+      expect(response.body).to include('Artifact successfully deleted!')
     end
   end
 

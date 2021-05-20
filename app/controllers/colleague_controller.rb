@@ -13,7 +13,7 @@ class ColleagueController < ApplicationController
     raise ResourceError.new(message: get_error_for(invited_colleague)) unless invited_colleague.valid?
 
     ColleagueMailer.with(colleague: invited_colleague).invitation_email.deliver_later
-    redirect_back(fallback_location: organization_dashboard_path)
+    redirect_back_success('Invitation Email successfully sent to colleague!')
   end
 
   def accept
@@ -25,12 +25,12 @@ class ColleagueController < ApplicationController
     @invited_colleague.save
     raise ResourceError.new(message: get_error_for(@invited_colleague), path: redirect_path) unless @invited_colleague.valid?
 
-    redirect_to(new_user_session_path)
+    redirect_success('Successfully created your account! Please login to continue', new_user_session_path)
   end
 
   def decline
     @invited_colleague.destroy
-    redirect_to(root_path)
+    redirect_success('Successfully declined the organization invitation!', root_path)
   end
 
   private

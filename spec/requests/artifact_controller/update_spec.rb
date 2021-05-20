@@ -53,6 +53,11 @@ RSpec.describe 'ArtifactController.update', type: :request do
     it 'updated the artifact description' do
       expect(artifact.description).to eq(params[:description])
     end
+
+    it 'shows a success message' do
+      follow_redirect!
+      expect(response.body).to include('Artifact successfully updated!')
+    end
   end
 
   describe 'resource does\'nt exist' do

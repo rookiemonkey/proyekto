@@ -28,6 +28,16 @@ class ApplicationController < ActionController::Base
     raise IsAlreadyLoggedInError.new(message: 'Oh no!') if user_signed_in?
   end
 
+  def redirect_back_success(message)
+    flash[:notice] = message
+    redirect_back(fallback_location: organization_dashboard_path)
+  end
+
+  def redirect_success(message, path)
+    flash[:notice] = message
+    redirect_to(path)
+  end
+
   protected
 
   def configure_permitted_parameters

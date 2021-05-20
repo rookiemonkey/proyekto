@@ -24,6 +24,12 @@ RSpec.describe 'ArtifactController.create', type: :request do
     it 'doesn\'t create a new artifact' do
       expect { post_request }.not_to change(Artifact, :count)
     end
+
+    it 'shows an error message' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('You need to sign in or sign up before continuing')
+    end
   end
 
   describe 'POST /projects/:pid/artifacts/new' do
@@ -36,6 +42,12 @@ RSpec.describe 'ArtifactController.create', type: :request do
 
     it 'creates a single artifact' do
       expect { post_request }.to change(Artifact, :count).by(1)
+    end
+
+    it 'shows a success message' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('Artifact successfully created!')
     end
   end
 

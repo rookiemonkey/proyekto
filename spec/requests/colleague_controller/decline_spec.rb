@@ -37,6 +37,12 @@ RSpec.describe 'ColleagueController.decline', type: :request do
     it 'deletes the user from database' do
       expect { get_request }.to change(User, :count).by(-1)
     end
+
+    it 'shows a success message' do
+      get_request
+      follow_redirect!
+      expect(response.body).to include('Successfully declined the organization invitation!')
+    end
   end
 
   describe 'invitation id that is not existing' do

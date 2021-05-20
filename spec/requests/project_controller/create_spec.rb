@@ -32,6 +32,12 @@ RSpec.describe 'ProjectController.create', type: :request do
     it 'creates a single project' do
       expect { post_request }.to change { Project.all.length }.by(1)
     end
+
+    it 'shows a success message' do
+      post_request
+      follow_redirect!
+      expect(response.body).to include('Project successfully created!')
+    end
   end
 
   describe 'incorrect details (eg: name)' do

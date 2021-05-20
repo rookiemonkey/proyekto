@@ -45,6 +45,11 @@ RSpec.describe 'ProjectController.create', type: :request do
     it 'updates the project name' do
       expect(project.name).to eq(params[:project][:name])
     end
+
+    it 'shows a success message' do
+      follow_redirect!
+      expect(response.body).to include('Project successfully updated!')
+    end
   end
 
   describe 'incorrect details (eg: name)' do
