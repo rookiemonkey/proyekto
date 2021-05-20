@@ -1,11 +1,12 @@
 <div id="update-project-<%= handle %>" class="modal">
   <div class="modal-background jb-modal-close"></div>
     <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Update Project</p>
+        <button class="delete jb-modal-close" aria-label="close"></button>
+      </header>
+
       <%= form_with model: project, url: organization_project_update_path(project), method: :put do |form|  %>
-        <header class="modal-card-head">
-          <p class="modal-card-title">Update Project</p>
-          <button class="delete jb-modal-close" aria-label="close"></button>
-        </header>
         <section class="modal-card-body">
           <div class="field is-horizontal">
           <div class="field-label is-normal">
@@ -25,6 +26,7 @@
           <button type="submit" class="button is-warning">Update</button>
         </footer>
       <% end %>
+      
     </div>
   <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
 </div>

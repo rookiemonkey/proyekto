@@ -7,7 +7,6 @@
   max-width: 400px;
   padding: 20px;
   background: #cccccc;
-  font-family: 'Arvo', serif;
   color: #333333;
   font-size: 0.75rem;
   font-weight: 700;
@@ -28,13 +27,13 @@
 }
 
 .toast--success {
-  background: #28a745;
-  border-color: #28a745;
-  color: #ffffff; 
+  background: #8fefcb;
+  border-color: #8fefcb;
+  color: #333333; 
 }
 
 .toast--error {
-  background: #dc3545;
-  border-color: #dc3545;
-  color: #ffffff; 
+  background: #ef8fa6;
+  border-color: #ef8fa6;
+  color: #333333; 
 }
