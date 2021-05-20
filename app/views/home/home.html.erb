@@ -5,12 +5,20 @@
     </div>
 
     <ul class="right">
-      <li>
-        <%= link_to 'Signin', new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to 'Signup', new_user_registration_path %>
-      </li>
+
+      <% if current_user %>
+        <li>
+          <%= link_to 'Dashboard', organization_dashboard_path %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to 'Signin', new_user_session_path %>
+        </li>
+        <li>
+          <%= link_to 'Signup', new_user_registration_path %>
+        </li>
+      <% end %>
+
     </ul>
   </nav>
 
@@ -22,7 +30,13 @@
     <div class="right">
       <%= image_tag asset_path('proyekto.png'), 'style': 'width: 50%', data: { aos: 'fade-left', 'aos-delay': '500' } %>
       <h2 data-aos="fade-left" data-aos-delay="800">A Modern approach for your organization's projects!</h2>
-      <%= link_to 'Get Started Now!', new_user_registration_path, data: { aos: 'fade-left', 'aos-delay': '1100' } %>
+      
+      <% if current_user %>
+        <%= link_to 'Dashboard', organization_dashboard_path, data: { aos: 'fade-left', 'aos-delay': '1100' } %>
+      <% else %>
+        <%= link_to 'Get Started Now!', new_user_registration_path, data: { aos: 'fade-left', 'aos-delay': '1100' } %>
+      <% end %>
+
     </div>
   </section>
 
