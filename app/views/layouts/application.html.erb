@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
+<html lang="en">
   <head>
     <%= render 'layouts/meta_headers' %>
   </head>
@@ -26,6 +26,12 @@
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
 
   <script>
+    document.addEventListener('turbolinks:load', () => {
+      const element = document.getElementsByTagName('html')[0]
+      const className = 'has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded'
+      element.className == className ? null : element.className = className
+    })
+
     window.notification = new window.HTMLElementToaster()
     window.notification.initialize()
     <% if notice %>window.notification.showMessage(`<%= notice %>`, 'success');<% end %>

@@ -48,10 +48,11 @@
                   <span class="icon">
                     <i class="mdi mdi-upload default"></i>
                   </span>
-                  <span>Pick a file</span>
+                  <span id="image-input-label">Pick an Image</span>
                 </a>
-                <%= form.file_field :image %>
+                <%= form.file_field :image, id: 'image-input' %>
               </label>
+              <%= image_tag asset_path('placeholder.png'), alt: "No artifact image available", id: 'preview' %>
             </div>
             </div>
           </div>
@@ -59,6 +60,7 @@
       </section>
       <footer class="modal-card-foot">
         <button type="button" class="button jb-modal-close">Cancel</button>
+        <button type="button" class="button is-secondary" id="btn-remove-image">Remove Image</button>
         <button type="submit" class="button is-primary">Create Artifact</button>
       </footer>
 
@@ -67,3 +69,23 @@
     </div>
   <button class="modal-close is-large jb-modal-close" aria-label="close"></button>
 </div>
+
+<script>
+  const btnRemoveImage = document.querySelector('#btn-remove-image');
+  const fileInput = document.querySelector('#image-input');
+  const fileInputLabel = document.querySelector('#image-input-label');
+  const preview = document.querySelector('#preview');
+  const defaultImageURL = preview.src;
+
+  fileInput.addEventListener('change', () => {
+    const uploadedImage = fileInput.files[0]
+    fileInputLabel.textContent = uploadedImage.name
+    preview.src = URL.createObjectURL(uploadedImage)
+  })
+
+  btnRemoveImage.addEventListener('click', () => {
+    fileInput.value = '';
+    fileInputLabel.textContent = 'Pick an Image'
+    preview.src = defaultImageURL
+  })
+</script>
