@@ -35,11 +35,10 @@
     window.notification = new window.HTMLElementToaster()
     window.notification.initialize()
 
-    const disabledButtons = document.querySelectorAll("[data-disabled='true']");
-    disabledButtons.forEach(el => {
+    document.querySelectorAll("[data-disabled='true']").forEach(el => {
       el.addEventListener('click', () => {
         const restrictedMessage = `
-          Resource is disabled due to plan downgrade.
+          Resource is disabled due to plan restrictions.
           Please upgrade your plan to regain access.
         `;
         window.notification.showMessage(restrictedMessage, 'error')

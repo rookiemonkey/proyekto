@@ -59,7 +59,7 @@ RSpec.describe 'ProjectController.read', type: :request do
     end
   end
 
-  describe 'resource is disabled due to plan downgrade' do
+  describe 'resource is disabled due to plan restrictions' do
     before do
       project.disabled = true
       project.save
@@ -72,7 +72,7 @@ RSpec.describe 'ProjectController.read', type: :request do
 
     it 'shows an error message' do
       follow_redirect!
-      expect(response.body).to include('Resource is disabled due to plan downgrade. Please upgrade your plan to regain access')
+      expect(response.body).to include('Resource is disabled due to plan restrictions. Please upgrade your plan to regain access')
     end
   end
 end

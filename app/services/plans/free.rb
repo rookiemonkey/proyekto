@@ -7,6 +7,7 @@ module Plans::Free
       next if project.disabled.is_a?(TrueClass)
 
       project.update(disabled: true)
+      project.artifacts.each { |artifact| artifact.update(disabled: true) }
     end
   end
 end

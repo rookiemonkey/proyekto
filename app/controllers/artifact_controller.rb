@@ -2,6 +2,7 @@ class ArtifactController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project
   before_action :set_artifact, only: %i[update delete]
+  before_action :redirect_if_artifact_is_disabled, only: %i[update delete]
   before_action :validate_image_upload, only: %i[create]
 
   def read_all
