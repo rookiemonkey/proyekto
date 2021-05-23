@@ -31,7 +31,7 @@ RSpec.describe 'OrganizationController.artifacts', type: :request do
   describe 'GET /artifacts' do
     # for some reason, pagy returns an uninitialized error referring to params on backend.rb line:22
     # adding the page: 1 as an option fixes the issue but not needed anymore on the controller
-    let(:artifacts) { pagy(Artifact.where(organization: user.organization), items: 30, page: 1)[1] }
+    let(:artifacts) { pagy(Artifact.where(organization: user.organization, disabled: false), items: 30, page: 1)[1] }
 
     before { get orgazniation_artifacts_path }
 

@@ -61,4 +61,21 @@ RSpec.describe 'ProjectController.delete', type: :request do
       expect { delete_request_fail }.not_to change(Project, :count)
     end
   end
+
+  describe 'resource is disabled due to plan restrictions' do
+    before do
+      project.disabled = true
+      project.save
+      delete organization_project_delete_path(project)
+    end
+
+    it 'returns http redirect to projects' do
+      expect(response).to redirect_to(organization_projects_path)
+    end
+
+    it 'shows an error message' do
+      follow_redirect!
+      expect(response.body).to include('Resource is disabled due to plan restrictions. Please upgrade your plan to regain access')
+    end
+  end
 end

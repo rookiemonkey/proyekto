@@ -39,7 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_project_is_disabled
-    raise ResourceError.new(message: 'Resource is disabled due to plan downgrade. Please upgrade your plan to regain access', path: organization_projects_path) if @project.disabled
+    raise ResourceError.new(message: 'Resource is disabled due to plan restrictions. Please upgrade your plan to regain access', path: organization_projects_path) if @project.disabled
+  end
+
+  def redirect_if_artifact_is_disabled
+    raise ResourceError.new(message: 'Resource is disabled due to plan restrictions. Please upgrade your plan to regain access') if @artifact.disabled
   end
 
   protected

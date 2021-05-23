@@ -53,7 +53,7 @@ RSpec.describe 'ProjectController.create', type: :request do
   end
 
   describe 'incorrect details (eg: name)' do
-    before { put organization_project_update_path(user.organization.projects.sample), params: { project: { name: nil } } }
+    before { put organization_project_update_path(project), params: { project: { name: nil } } }
 
     it 'returns http redirect to fallback (dashboard)' do
       expect(response).to redirect_to(organization_dashboard_path)
@@ -67,6 +67,23 @@ RSpec.describe 'ProjectController.create', type: :request do
     it 'doesn\'t update the project attributes' do
       project.reload
       expect(project.name).not_to eq(params[:name])
+    end
+  end
+
+  describe 'resource is disabled due to plan restrictions' do
+    before do
+      project.disabled = true
+      project.save
+      put organization_project_update_path(project), params: { project: { name: 'New Name!' } }
+    end
+
+    it 'returns http redirect to projects' do
+      expect(response).to redirect_to(organization_projects_path)
+    end
+
+    it 'shows an error message' do
+      follow_redirect!
+      expect(response.body).to include('Resource is disabled due to plan restrictions. Please upgrade your plan to regain access')
     end
   end
 end

@@ -7,6 +7,7 @@ module Plans::Enterprise
       next if project.disabled.is_a?(FalseClass)
 
       project.update(disabled: false)
+      project.artifacts.each { |artifact| artifact.update(disabled: false) }
     end
   end
 end

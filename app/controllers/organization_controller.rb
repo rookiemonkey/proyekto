@@ -12,6 +12,6 @@ class OrganizationController < ApplicationController
   end
 
   def artifacts
-    @pagy, @artifacts = pagy(Artifact.all, items: 30)
+    @pagy, @artifacts = pagy(Artifact.where(disabled: false), items: 30)
   end
 end

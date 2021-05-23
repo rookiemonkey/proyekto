@@ -34,10 +34,19 @@ RSpec.describe Plans do
   end
 
   describe 'activating FREE plan' do
-    before { described_class.free(organization) }
+    before do
+      organization.projects.each { |project| create_list(:artifact, 5, project: project, organization: organization) }
+      described_class.free(organization)
+    end
 
     it 'disables 9 old projects' do
       expect(organization.projects.where(disabled: true).count).to eq(9)
+    end
+
+    it 'disables all the artifacts associated to all the disabled projects' do
+      organization.projects.where(disabled: true).each do |project|
+        expect(project.artifacts.all?(&:disabled)).to eq(true)
+      end
     end
 
     it 'leaves 1 project not disabled' do
@@ -47,13 +56,26 @@ RSpec.describe Plans do
     it 'leaves the last created project not disabled' do
       expect(organization.projects.find_by(disabled: false)).to eq(organization.projects.last)
     end
+
+    it 'leaves the last created project\'s artifacts not disabled' do
+      expect(organization.projects.last.artifacts.all?(&:disabled)).to eq(false)
+    end
   end
 
   describe 'activating STANDARD plan' do
-    before { described_class.standard(organization) }
+    before do
+      organization.projects.each { |project| create_list(:artifact, 5, project: project, organization: organization) }
+      described_class.standard(organization)
+    end
 
     it 'disables 7 old projects' do
       expect(organization.projects.where(disabled: true).count).to eq(7)
+    end
+
+    it 'disables all the artifacts associated to all the disabled projects' do
+      organization.projects.where(disabled: true).each do |project|
+        expect(project.artifacts.all?(&:disabled)).to eq(true)
+      end
     end
 
     it 'leaves 3 project not disabled' do
@@ -63,10 +85,19 @@ RSpec.describe Plans do
     it 'leaves the last 3 created project not disabled' do
       expect(organization.projects.where(disabled: false)).to eq(organization.projects[-3..])
     end
+
+    it 'leaves the last 3 created project\'s artifacts not disabled' do
+      organization.projects[-3..].each do |project|
+        expect(project.artifacts.all?(&:disabled)).to eq(false)
+      end
+    end
   end
 
   describe 'activating ENTERPRISE plan' do
-    before { described_class.enterprise(organization) }
+    before do
+      organization.projects.each { |project| create_list(:artifact, 5, project: project, organization: organization) }
+      described_class.enterprise(organization)
+    end
 
     it 'disables 0 old projects' do
       expect(organization.projects.where(disabled: true).count).to eq(0)
@@ -74,6 +105,12 @@ RSpec.describe Plans do
 
     it 'leaves all projects not disabled' do
       expect(organization.projects.where(disabled: false).count).to eq(10)
+    end
+
+    it 'disables 0 artifacts associated to all the active projects' do
+      organization.projects.where(disabled: false).each do |project|
+        expect(project.artifacts.all?(&:disabled)).to eq(false)
+      end
     end
   end
 

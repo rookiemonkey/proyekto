@@ -90,4 +90,21 @@ RSpec.describe 'ArtifactController.update', type: :request do
       expect(artifact.name).not_to eq(nil)
     end
   end
+
+  describe 'resource is disabled due to plan restrictions' do
+    before do
+      artifact.disabled = true
+      artifact.save
+      put organization_project_artifact_update_path(project, artifact), params: { artifact: { name: 'New Name!' } }
+    end
+
+    it 'returns http redirect to projects' do
+      expect(response).to redirect_to(organization_dashboard_path)
+    end
+
+    it 'shows an error message' do
+      follow_redirect!
+      expect(response.body).to include('Resource is disabled due to plan restrictions. Please upgrade your plan to regain access')
+    end
+  end
 end
