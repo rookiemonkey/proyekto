@@ -1,6 +1,7 @@
 class ProjectController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, except: [:create]
+  before_action :redirect_if_project_is_disabled, except: [:create]
   before_action :set_artifacts, only: [:read]
 
   def read

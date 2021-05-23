@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
     redirect_to(path)
   end
 
+  def redirect_if_project_is_disabled
+    raise ResourceError.new(message: 'Resource is disabled due to plan downgrade. Please upgrade your plan to regain access', path: organization_projects_path) if @project.disabled
+  end
+
   protected
 
   def configure_permitted_parameters

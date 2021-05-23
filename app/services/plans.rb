@@ -45,10 +45,7 @@ class Plans
     }
   end
 
-  def self.change_plan(organization, new_plan)
-    return false if organization.plan == new_plan.to_s
-
-    self.send(new_plan, organization)
-    organization.update(plan: new_plan)
+  def self.change_plan(organization)
+    self.send(organization.plan, organization)
   end
 end

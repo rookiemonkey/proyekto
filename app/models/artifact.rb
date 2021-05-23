@@ -1,4 +1,6 @@
 class Artifact < ApplicationRecord
+  after_destroy { Gcloud.delete(self.image_name) }
+
   acts_as_tenant(:organization)
   belongs_to :project
 

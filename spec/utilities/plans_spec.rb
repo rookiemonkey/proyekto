@@ -77,20 +77,9 @@ RSpec.describe Plans do
     end
   end
 
-  describe 'changing an organization plan to the same plan' do
-    it 'returns false' do
-      expect(described_class.change_plan(organization, :enterprise)).to eq(false)
-    end
-  end
-
   describe 'changing an organization plan to another plan' do
     it 'returns true' do
-      expect(described_class.change_plan(organization, :free)).to eq(true)
-    end
-
-    it 'changes the organization plan' do
-      described_class.change_plan(organization, :free)
-      expect(organization.plan).to eq('free')
+      expect(described_class.change_plan(organization)).to eq(true)
     end
   end
 end
