@@ -1,4 +1,6 @@
 import MultiStepForm from '../payments/form'
+import PaymentAdapter from '../payments/adapter'
+import HTMLElementLoader from '../components/loader'
 import parseFormData from '../utilities/parseFormData'
 
 export default class Paymongo {
@@ -13,6 +15,7 @@ export default class Paymongo {
   static submitCardInformation = async event => {
     event.preventDefault()
 
+    window.loader = new HTMLElementLoader('#plan-screen').show();
     const formData = parseFormData(new FormData(this.cardInformationForm()))
     formData['exp_month'] = parseInt(formData['exp_month'])
     formData['exp_year'] = parseInt(formData['exp_year'])
@@ -35,14 +38,12 @@ export default class Paymongo {
   }
 
   static submitPaymentIntent = async () => {
-    const token = document.querySelector('meta[name="csrf-token"]').content
-
     const raw = await fetch('/new/payment/intent', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        "X-CSRF-Token": token
+        "X-CSRF-Token": MultiStepForm.token
       },
       body: JSON.stringify({ plan: MultiStepForm.state.chosen_plan.name })
     })
@@ -73,13 +74,13 @@ export default class Paymongo {
     })
 
     const response = await raw.json()
-    alert('Pleaes Check Console!')
-    console.log(response)
+    const parsedResponse = PaymentAdapter.parsePaymongoResponse(response)
+    await MultiStepForm.proceedOnPlanChange(parsedResponse)
   }
 
   static renderBaseHTML() {
     MultiStepForm.screen.insertAdjacentHTML('beforeend', `
-      <form id="paymongo_card_information_form">
+      <form method="post" id="paymongo_card_information_form">
         <div class="field is-horizontal"> 
           <div class="field-label is-normal">
             <label class="label">Card Number</label>
@@ -140,7 +141,11 @@ export default class Paymongo {
       </form>
 
       <div class="powered_by">
-        <p>Powered by: <img src="${MultiStepForm.paymentMethods[MultiStepForm.state.chosen_payment_method]['image']}" /></p>
+        <p>Powered by: 
+          <img src="${MultiStepForm.paymentMethods[MultiStepForm.state.chosen_payment_method]['image']}" alt="paymongo" />
+          <img src="/images/icon_visa.png" alt="visa" />
+          <img src="/images/icon_mastercard.png" alt="mastercard" />
+        </p>
       </div>
     `)
   }

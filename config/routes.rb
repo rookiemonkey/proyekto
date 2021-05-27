@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/projects', to: 'organization#projects', as: 'organization_projects'
   get '/colleagues', to: 'organization#colleagues', as: 'orgazniation_colleagues'
   get '/artifacts', to: 'organization#artifacts', as: 'orgazniation_artifacts'
+  put '/plans', to: 'organization#update_plan', as: 'update_organization_plan'
 
   # PROJECT
   get '/projects/:pid', to: 'project#read', as: 'organization_project'

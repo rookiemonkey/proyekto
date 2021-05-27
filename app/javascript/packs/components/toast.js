@@ -1,4 +1,4 @@
-window.HTMLElementToaster = class HTMLElementToaster {
+class HTMLElementToaster {
   initialize() {
     this.hideTimeout = null;
     this.element = document.createElement("div");
@@ -20,3 +20,5 @@ window.HTMLElementToaster = class HTMLElementToaster {
     }, 3000);
   }
 }
+
+window.HTMLElementToaster = HTMLElementToaster
