@@ -1,5 +1,5 @@
-import MultiStepForm from '../multi_step_form'
-import parseAmount from '../utilities/parseAmount'
+import MultiStepForm from '../form'
+import parseAmount from '../../utilities/parseAmount'
 
 export default class PlanListItem {
   constructor(plan) {

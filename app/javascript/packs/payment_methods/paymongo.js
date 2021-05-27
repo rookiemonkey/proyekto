@@ -1,9 +1,9 @@
-import MultiStepForm from '../multi_step_form'
+import MultiStepForm from '../payments/form'
 import parseFormData from '../utilities/parseFormData'
 
 export default class Paymongo {
   static authenticationKey = () => window.btoa(process.env.PAYMONGO_PK)
-  static cardInformationForm = () => document.getElementById('card_information_form')
+  static cardInformationForm = () => document.getElementById('paymongo_card_information_form')
 
   static initialize() {
     this.renderBaseHTML();

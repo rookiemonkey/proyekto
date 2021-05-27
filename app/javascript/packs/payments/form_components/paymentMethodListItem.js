@@ -1,4 +1,4 @@
-import MultiStepForm from '../multi_step_form'
+import MultiStepForm from '../form'
 
 export default class PaymentMethodListItem {
   constructor(paymentMethod) {

@@ -1,7 +1,7 @@
-import PaymentAdapter from './payment_adapter';
-import stateInterface from './multi_step_form/state';
-import PlanListItem from './multi_step_form/planListItem';
-import PaymentMethodListItem from './multi_step_form/paymentMethodListItem';
+import PaymentAdapter from './adapter';
+import stateInterface from './form_components/state';
+import PlanListItem from './form_components/planListItem';
+import PaymentMethodListItem from './form_components/paymentMethodListItem';
 
 export default class MultiStepForm extends PaymentAdapter {
   static screen = document.querySelector('#plan-screen')
@@ -28,16 +28,16 @@ export default class MultiStepForm extends PaymentAdapter {
     Object.keys(this.paymentMethods).forEach(paymentMethodName => new PaymentMethodListItem(this.paymentMethods[paymentMethodName]))
   }
 
-  // method mounted to dom in arrow function to avoid losing the context of this
+  // method mounted to DOM element in arrow function to avoid losing the context of this
 
   static chosePlan = event => {
-    const { price, name } = event.target.dataset
+    const { price, name } = event.target.closest('li.plan-list-item').dataset
     this.state = {...this.state, chosen_plan: { name, price }}
     this.navigate('toChoosePaymentMethod')
   }
 
   static chosePaymentMethod = event => {
-    const { strategy } = event.target.dataset
+    const { strategy } = event.target.closest('li.payment-method-list-item').dataset
     this.state = { ...this.state, chosen_payment_method: strategy }
     this.navigate(strategy)
   }
