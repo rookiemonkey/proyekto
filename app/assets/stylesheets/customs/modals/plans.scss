@@ -1,3 +1,5 @@
+
+// plan list
 .plan-list-item {
   display: flex;
   margin: 2.5% 0;
@@ -47,4 +49,23 @@
 
 .plan-list-item.active {
   background-color: whitesmoke;
+}
+
+
+// plan preview
+.plan-preview {
+
+  .plan-preview-message {
+    font-size: smaller;
+  }
+
+  .plan-list-item {
+    background-color: whitesmoke;
+
+    &:hover {
+      background-color: whitesmoke;
+      cursor: default;
+    }
+  }
+
 }

@@ -7,7 +7,7 @@ export default class ConfirmPlanChange {
     // render to DOM - Plan Screen
     MultiStepForm.screen
       .insertAdjacentHTML('beforeend', `
-        <p>Please Confirm to to proceed in changing your plan from ${window.currentPlan} to ${this.newPlan}</p>
+        <p>Please Confirm to proceed in changing your plan from ${window.currentPlan} to ${this.newPlan}</p>
       `)
 
     // render to DOM - Plan Footer

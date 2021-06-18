@@ -1,5 +1,6 @@
 import PaymentAdapter from './adapter';
 import stateInterface from './form_components/state';
+import PlanPreview from './form_components/planPreview';
 import PlanListItem from './form_components/planListItem';
 import PaymentMethodListItem from './form_components/paymentMethodListItem';
 import ConfirmPlanChange from './form_components/confirmPlanChange';
@@ -21,8 +22,10 @@ export default class MultiStepForm extends PaymentAdapter {
   }
 
   static reset() {
+    const preview = document.querySelector('.plan-preview')
     this.navigate('toChoosePlan');
     this.state = { ...stateInterface };
+    preview ? preview.remove() : null
     if (document.querySelector('#plan-footer').childElementCount > 1) document.querySelector('#plan-footer').lastElementChild.remove()
   }
 
@@ -32,11 +35,16 @@ export default class MultiStepForm extends PaymentAdapter {
   }
 
   static toChoosePaymentMethod(){
+    new PlanPreview(this.state.chosen_plan.name);
     PaymentMethodListItem.renderBaseHTML();
     Object.keys(this.paymentMethods).forEach(paymentMethodName => new PaymentMethodListItem(this.paymentMethods[paymentMethodName]))
   }
 
   static toConfirmPlanChange(newPlan) {
+    // prevent navigating to confirm plan change if chose the same plan that they are on
+    // if (newPlan == window.currentPlan) {
+    //   return window.notification.showMessage('You are already on that plan', 'error')
+    // }
     new ConfirmPlanChange(newPlan)
   }
 
