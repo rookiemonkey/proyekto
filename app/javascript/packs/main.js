@@ -1,6 +1,8 @@
 "use strict";
 import MultiStepForm from './payments/form'
 
+MultiStepForm.initialize()
+
 /* Aside: submenus toggle */
 Array.from(document.getElementsByClassName('menu is-menu-main')).forEach(function (el) {
   Array.from(el.getElementsByClassName('has-dropdown-icon')).forEach(function (elA) {

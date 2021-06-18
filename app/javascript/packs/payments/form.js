@@ -82,5 +82,3 @@ export default class MultiStepForm extends PaymentAdapter {
     this.navigate(strategy)
   }
 }
-
-MultiStepForm.initialize()
