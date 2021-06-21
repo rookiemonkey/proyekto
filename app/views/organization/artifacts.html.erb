@@ -1,71 +1,92 @@
 <%= render 'components/breadcrumb', breadcrumbs: ['Artifacts'] %>
 
-<section class="section" style="padding-bottom: 1%">
-  <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
-</section>
+<section class="section section-main artifacts">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <div class="tile is-parent artifacts-table">
 
-<section class="section section-main">
-  <div class="card has-table has-mobile-sort-spaced">
-    <div class="card-content">
-      <div class="b-table has-pagination">
-        <div class="table-wrapper has-mobile-cards">
-          <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
-            <thead>
+        <div style="padding-bottom: 1%">
+          <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
+        </div>
 
+        <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
+
+          <thead>
             <tr>
               <th>Name</th>
               <th>Image</th>
               <th>Description</th>
-              <th>Project</th>
-              <th style="width: 15%"></th>
             </tr>
-            </thead>
+          </thead>
 
-            <tbody>
-              <% @artifacts.each do |artifact| %>
-                <% handle = "#{artifact.id}-#{artifact.name.parameterize}" %>
-                <% project = artifact.project %>
+          <tbody>
+            <% @artifacts.each do |artifact| %>
+              <% handle = "#{artifact.id}-#{artifact.name.parameterize}" %>
+              <% project = artifact.project %>
 
-                <tr>
-                  <td data-label="Name">
-                    <%= artifact.name %>
-                  </td>
-                  <td data-label="Image">
-                    <% if artifact.image_url %>
-                      <img src="<%= artifact.image_url %>" alt="<% artifact.name %>"/>
-                    <% else %>
-                      <%= image_tag asset_path('placeholder.png'), alt: "No artifact image available" %>
-                    <% end %>
-                  </td>
-                  <td data-label="Description">
-                    <%= artifact.description %>
-                  </td>
-                  <td data-label="Project">
-                    <%= project.name %>
-                  </td>
-                  <td data-label="Actions">
-                    <button class="button is-warning jb-modal ml-1" data-target="update-artifact-<%= handle %>">
-                      <span class="icon"><i class="mdi mdi-pencil"></i></span>
-                    </button>
-                    <button class="button is-danger jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
-                      <span class="icon"><i class="mdi mdi-window-close"></i></span>
-                    </button>
-                  </td>
-                  <td class="is-actions-cell"></td>
-                </tr>
+              <tr>
+                <td data-label="name">
+                  <%= artifact.name %>
+                </td>
+                <td data-label="image">
+                  <% if artifact.image_url %>
+                    <img src="<%= artifact.image_url %>" alt="<% artifact.name %>"/>
+                  <% else %>
+                    <%= image_tag asset_path('placeholder.png'), alt: "No artifact image available" %>
+                  <% end %>
+                </td>
+                <td data-label="description">
+                  <%= artifact.description %>
+                </td>
+                <td data-label="actions">
+                  <button class="button is-warning jb-modal ml-1" data-target="update-artifact-<%= handle %>">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                  </button>
+                  <button class="button is-danger jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
+                    <span class="icon"><i class="mdi mdi-window-close"></i></span>
+                  </button>
+                </td>
+                <td class="is-actions-cell"></td>
+              </tr>
 
-                <%= render 'components/modal_artifact_update', project: project, artifact: artifact, handle: handle %>
-                <%= render 'components/modal_artifact_delete', project: project, artifact: artifact, handle: handle %>
-              <% end %>
-            </tbody>
+              <%= render 'components/modal_artifact_update', project: project, artifact: artifact, handle: handle %>
+              <%= render 'components/modal_artifact_delete', project: project, artifact: artifact, handle: handle %>
+            <% end %>
+          </tbody>
 
-          </table>
+        </table>
+
+        <div style="padding-top: 1%">
+          <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
         </div>
+
+      </div>
+    </div>
+
+    <div class="tile is-parent">
+      <div class="tile is-parent">
+        <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth artifacts-activities-table">
+          <thead>
+            <tr>
+              <th id="activities">Activities (Last 10 Activities)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+              <% @activities.each do |activity| %>
+
+              <tr>
+                <td>
+                  <p class="activity-description"><%= activity.description %></p>
+                  <p class="activity-timestamp"><%= date_in_full_words_with_time(activity.created_at) %></p>
+                </td>
+              </tr>
+              
+            <% end %>
+          </tbody>
+
+        </table>
       </div>
     </div>
   </div>
-</section>
-
-<section class="section" style="padding-top: 1%">
-  <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
 </section>

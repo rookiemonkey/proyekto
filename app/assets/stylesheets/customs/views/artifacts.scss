@@ -1,0 +1,31 @@
+.artifacts {
+
+  .artifacts-table {
+    flex-direction: column;
+
+    td {
+      vertical-align: middle;
+    }
+
+    td img {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+
+  .artifacts-activities-table {
+    height: max-content;
+    position: sticky;
+    top: 6vh;
+
+    #activities {
+      text-align: center;
+    }
+
+    .activity-timestamp {
+      color: hsl(0, 0%, 51%);
+      font-size: smaller;
+    }
+  }
+  
+}

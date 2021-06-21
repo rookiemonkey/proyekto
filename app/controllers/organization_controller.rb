@@ -14,6 +14,7 @@ class OrganizationController < ApplicationController
 
   def artifacts
     @pagy, @artifacts = pagy(Artifact.where(disabled: false), items: 30)
+    @activities = Activity.where(activity_type: 'artifact').limit(10)
   end
 
   def update_plan
