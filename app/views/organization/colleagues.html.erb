@@ -1,45 +1,63 @@
 <%= render 'components/breadcrumb', breadcrumbs: ['Colleagues'] %>
 
-<section class="section section-main">
-  <div class="card has-table has-mobile-sort-spaced">
-    <div class="card-content">
-      <div class="b-table has-pagination">
-        <div class="table-wrapper has-mobile-cards">
-          <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth">
-            <thead>
+<section class="section section-main colleagues">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth colleagues-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th id="full-name">Full Name</th>
+            <th id="since">Since</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @colleagues.each do |colleague| %>
 
             <tr>
-              <th></th>
-              <th>Full Name</th>
-              <th>Since</th>
-              <th></th>
+              <td class="is-image-cell">
+                <div class="image">
+                  <%= avatar_for(colleague.full_name) %>
+                </div>
+              </td>
+              <td data-label="name">
+                <%= colleague.full_name %>
+              </td>
+              <td data-label="since">
+                <%= date_in_full_words(colleague.created_at) %>
+              </td>
+              <td class="is-actions-cell"></td>
             </tr>
-            </thead>
+            
+          <% end %>
+        </tbody>
 
-            <tbody>
-              <% @colleagues.each do |colleague| %>
+      </table>
+    </div>
 
-                <tr>
-                  <td class="is-image-cell">
-                    <div class="image">
-                      <%= avatar_for(colleague.full_name) %>
-                    </div>
-                  </td>
-                  <td data-label="Name">
-                    <%= colleague.full_name %>
-                  </td>
-                  <td data-label="Since">
-                    <%= colleague.created_at %>
-                  </td>
-                  <td class="is-actions-cell"></td>
-                </tr>
-                
-              <% end %>
-            </tbody>
+    <div class="tile is-parent">
+      <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth colleagues-activities-table">
+        <thead>
+          <tr>
+            <th id="activities">Activities (Last 10 Activity)</th>
+          </tr>
+        </thead>
 
-          </table>
-        </div>
-      </div>
+        <tbody>
+            <% @activities.each do |activity| %>
+
+            <tr>
+              <td>
+                <p class="activity-description"><%= activity.description %></p>
+                <p class="activity-timestamp"><%= date_in_full_words_with_time(activity.created_at) %></p>
+              </td>
+            </tr>
+            
+          <% end %>
+        </tbody>
+
+      </table>
     </div>
   </div>
 </section>

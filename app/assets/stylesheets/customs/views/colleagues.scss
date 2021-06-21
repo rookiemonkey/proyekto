@@ -1,0 +1,27 @@
+.colleagues {
+
+  .colleagues-table {
+    #since,
+    td[data-label='since'] {
+      text-align: center;
+    }
+
+    td {
+      vertical-align: middle
+    }
+  }
+
+  .colleagues-activities-table {
+    height: max-content;
+
+    #activities {
+      text-align: center;
+    }
+
+    .activity-timestamp {
+      color: hsl(0, 0%, 51%);
+      font-size: smaller;
+    }
+  }
+
+}
