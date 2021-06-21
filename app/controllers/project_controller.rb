@@ -42,6 +42,6 @@ class ProjectController < ApplicationController
   end
 
   def trigger_activity(description)
-     Activity.create_project_activity(description)
+    Activity.create_project_activity(description)
   end
 end

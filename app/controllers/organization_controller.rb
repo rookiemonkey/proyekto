@@ -29,6 +29,6 @@ class OrganizationController < ApplicationController
   end
 
   def trigger_activity(description)
-     Activity.create_account_activity(description)
+    Activity.create_account_activity(description)
   end
 end

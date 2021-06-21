@@ -24,7 +24,6 @@ RSpec.describe 'ProjectController.delete', type: :request do
       expect { delete_request }.not_to change(Project, :count)
     end
 
-
     it 'doesn\'t create an artifact activity' do
       expect { delete_request }.not_to change(Activity, :count)
     end

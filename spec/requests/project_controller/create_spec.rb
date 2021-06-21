@@ -48,7 +48,6 @@ RSpec.describe 'ProjectController.create', type: :request do
       expect { post_request }.to change(Activity, :count).by(1)
     end
 
-
     it 'shows a success message' do
       post_request
       follow_redirect!

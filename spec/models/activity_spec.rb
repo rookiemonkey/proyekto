@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
-
-  context 'base model w/o description' do
+  context 'without description for base model' do
     let(:base_activity) { create(:activity) }
 
     before do
@@ -27,34 +26,34 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  context '.create_staff_activity' do
-    let(:staff_activity) { Activity.create_staff_activity(attributes_for(:activity)) }
+  describe '.create_staff_activity' do
+    let(:staff_activity) { described_class.create_staff_activity(attributes_for(:activity)) }
 
-    it 'has activity_type of "staff"'do
+    it 'has activity_type of "staff"' do
       expect(staff_activity.activity_type).to eq('staff')
     end
   end
 
-  context '.create_account_activity' do
-    let(:account_activity) { Activity.create_account_activity(attributes_for(:activity)) }
+  describe '.create_account_activity' do
+    let(:account_activity) { described_class.create_account_activity(attributes_for(:activity)) }
 
-    it 'has activity_type of "account"'do
+    it 'has activity_type of "account"' do
       expect(account_activity.activity_type).to eq('account')
     end
   end
 
-  context '.create_artifact_activity' do
-    let(:artifact_activity) { Activity.create_artifact_activity(attributes_for(:activity)) }
+  describe '.create_artifact_activity' do
+    let(:artifact_activity) { described_class.create_artifact_activity(attributes_for(:activity)) }
 
-    it 'has activity_type of "artifact"'do
+    it 'has activity_type of "artifact"' do
       expect(artifact_activity.activity_type).to eq('artifact')
     end
   end
 
-  context '.create_project_activity' do
-    let(:project_activity) { Activity.create_project_activity(attributes_for(:activity)) }
+  describe '.create_project_activity' do
+    let(:project_activity) { described_class.create_project_activity(attributes_for(:activity)) }
 
-    it 'has activity_type of "project"'do
+    it 'has activity_type of "project"' do
       expect(project_activity.activity_type).to eq('project')
     end
   end

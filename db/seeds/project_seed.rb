@@ -5,7 +5,14 @@ module Seeds
 
     def self.produce
       Seeds::Organization.all.each do |organization| 
-        @@count.times { ::Project.create(name: Faker::Movie.title, organization: organization) }
+        @@count.times do 
+          new_project_name = Faker::Movie.title
+
+          ::Project.create(name: new_project_name, organization: organization)
+          ::Activity.create(description: "[SEEDER]: Project '#{new_project_name}'' has been created",
+                            organization: organization,
+                            activity_type: 'project')
+        end
       end
 
       @@all = ::Project.where(organization: Seeds::Organization.current_tenant)

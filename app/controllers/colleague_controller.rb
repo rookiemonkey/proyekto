@@ -53,6 +53,6 @@ class ColleagueController < ApplicationController
   end
 
   def trigger_activity(attributes)
-     Activity.create_staff_activity(attributes)
+    Activity.create_staff_activity(attributes)
   end
 end

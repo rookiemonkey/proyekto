@@ -73,6 +73,6 @@ class ArtifactController < ApplicationController
   end
 
   def trigger_activity(description)
-     Activity.create_artifact_activity(description)
+    Activity.create_artifact_activity(description)
   end
 end
