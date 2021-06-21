@@ -9,12 +9,12 @@ class OrganizationController < ApplicationController
 
   def colleagues
     @colleagues = User.all
-    @activities = Activity.where(activity_type: 'staff').limit(10)
+    @activities = Activity.where(activity_type: 'staff').order(created_at: :desc).limit(10)
   end
 
   def artifacts
     @pagy, @artifacts = pagy(Artifact.where(disabled: false), items: 30)
-    @activities = Activity.where(activity_type: 'artifact').limit(10)
+    @activities = Activity.where(activity_type: 'artifact').order(created_at: :desc).limit(10)
   end
 
   def update_plan
