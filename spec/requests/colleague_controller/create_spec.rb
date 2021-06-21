@@ -9,14 +9,19 @@ RSpec.describe 'ColleagueController.create', type: :request do
   describe 'w/o auth' do
     before do
       sign_out(:user)
-      post_request
     end
 
     it 'returns http redirect to login' do
+      post_request
       expect(response).to redirect_to(new_user_session_path)
     end
 
+    it 'doesn\'t create an staff activity' do
+      expect { post_request }.not_to change(Activity, :count)
+    end
+
     it 'shows an error' do
+      post_request
       follow_redirect!
       expect(response.body).to include('You need to sign in or sign up before continuing')
     end
@@ -35,6 +40,10 @@ RSpec.describe 'ColleagueController.create', type: :request do
     it 'creates a single user w/ inviation id' do
       post_request
       expect(User.last.invitation_id.nil?).to eq(false)
+    end
+
+    it 'creates a staff activity' do
+      expect { post_request }.to change(Activity, :count).by(1)
     end
 
     it 'shows a success message' do

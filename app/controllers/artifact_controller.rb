@@ -16,6 +16,7 @@ class ArtifactController < ApplicationController
     created_artifact = Artifact.create(**artifact_params, **upload_details, project_id: params[:pid])
     raise ResourceError.new(message: get_error_for(created_artifact)) unless created_artifact.valid?
 
+    trigger_activity("Artifact '#{artifact_params[:name]}' has been created by #{current_user.full_name}")
     redirect_back_success('Artifact successfully created!')
   end
 
@@ -24,11 +25,13 @@ class ArtifactController < ApplicationController
     upload_details = Gcloud.upload(artifact_image.tempfile.path, @artifact.image_name || artifact_image_name) if artifact_image
     raise ResourceError.new(message: get_error_for(@artifact)) unless @artifact.update(**artifact_params, **upload_details)
 
+    trigger_activity("Artifact '#{@artifact.name}' has been updated by #{current_user.full_name}")
     redirect_back_success('Artifact successfully updated!')
   end
 
   def delete
     @artifact.destroy
+    trigger_activity("Artifact '#{@artifact.name}' has been deleted by #{current_user.full_name}")
     redirect_back_success('Artifact successfully deleted!')
   end
 
@@ -67,5 +70,9 @@ class ArtifactController < ApplicationController
     period = artifact_image.original_filename.rindex('.')
     extension = artifact_image.original_filename[period, artifact_image.original_filename.length]
     "#{IdGenerator.generate}#{extension}"
+  end
+
+  def trigger_activity(description)
+     Activity.create_artifact_activity(description)
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Activating Enterprise Plan' do
+RSpec.describe Plans::Enterprise do
   let(:organization) { create(:user).organization }
 
   before { create_list(:project, 10, organization: organization) }

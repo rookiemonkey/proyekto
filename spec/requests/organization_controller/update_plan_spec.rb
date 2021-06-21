@@ -25,28 +25,35 @@ RSpec.describe 'OrganizationController.update_plan', type: :request do
   end
 
   describe 'PUT /plans' do
-    before do
-      put update_organization_plan_path, params: { plan: { plan: 'standard' } }
-      organization.reload
-    end
+    let(:put_request) { put update_organization_plan_path, params: { plan: { plan: 'standard' } } }
 
     it 'updates the organization plan' do
+      put_request
+      organization.reload
       expect(organization.plan).to eq('standard')
     end
 
     it 'returns a hash with success key' do
+      put_request
       expect(JSON.parse(response.body).key?('success')).to eq(true)
     end
 
     it 'returns a hash with message key' do
+      put_request
       expect(JSON.parse(response.body).key?('message')).to eq(true)
     end
 
+    it 'creates an account activity' do
+      expect { put_request }.to change(Activity, :count).by(1)
+    end
+
     it 'shows success is true' do
+      put_request
       expect(JSON.parse(response.body).fetch('success')).to eq(true)
     end
 
     it 'shows message is succesful' do
+      put_request
       expect(JSON.parse(response.body).fetch('message')).to eq('Successfully updated your plan')
     end
   end

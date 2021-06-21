@@ -10,14 +10,19 @@ RSpec.describe 'ColleagueController.accept', type: :request do
     before do
       sign_in(user)
       post_request
-      put_request
     end
 
     it 'redirects to dashboard' do
+      put_request
       expect(response).to redirect_to(organization_dashboard_path)
     end
 
+    it 'doesn\'t create an staff activity' do
+      expect { put_request }.not_to change(Activity, :count)
+    end
+
     it 'shows an error' do
+      put_request
       follow_redirect!
       expect(response.body).to include('You are already logged in')
     end
@@ -28,22 +33,29 @@ RSpec.describe 'ColleagueController.accept', type: :request do
       sign_in(user)
       post_request
       sign_out(user)
-      put_request
     end
 
     it 'returns http redirect to login' do
+      put_request
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'updates the invitation_id to nil' do
+      put_request
       expect(User.last.invitation_id).to eq(nil)
     end
 
     it 'updates the password' do
+      put_request
       expect(User.last.valid_password?(params[:invite_new_password])).to eq(true)
     end
 
+    it 'creates a staff activity' do
+      expect { put_request }.to change(Activity, :count).by(1)
+    end
+
     it 'shows a success message' do
+      put_request
       follow_redirect!
       expect(response.body).to include('Successfully created your account! Please login to continue')
     end

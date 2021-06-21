@@ -32,29 +32,39 @@ RSpec.describe 'ArtifactController.update', type: :request do
       artifact.reload
       expect(artifact.name).not_to eq(params[:name])
     end
+
+    it 'doesn\'t create an artifact activity' do
+      expect { put_request }.not_to change(Activity, :count)
+    end
   end
 
   describe 'PUT /projects/:pid/artifacts/:aid' do
     let(:params) { { name: 'New Name', description: 'New Description' } }
-
-    before do
-      put organization_project_artifact_update_path(project, artifact), params: { artifact: params }
-      artifact.reload
-    end
+    let(:put_request) { put organization_project_artifact_update_path(project, artifact), params: { artifact: params } }
 
     it 'returns http redirect to fallback (dashboard)' do
+      put_request
       expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'updated the artifact name' do
+      put_request
+      artifact.reload
       expect(artifact.name).to eq(params[:name])
     end
 
     it 'updated the artifact description' do
+      put_request
+      artifact.reload
       expect(artifact.description).to eq(params[:description])
     end
 
+    it 'creates an artifact activity' do
+      expect { put_request }.to change(Activity, :count).by(1)
+    end
+
     it 'shows a success message' do
+      put_request
       follow_redirect!
       expect(response.body).to include('Artifact successfully updated!')
     end
