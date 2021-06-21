@@ -14,39 +14,48 @@ RSpec.describe 'ProjectController.create', type: :request do
   describe 'w/o auth' do
     before do
       sign_out(:user)
-      put_request
     end
 
     it 'returns http redirect to login' do
+      put_request
       expect(response).to redirect_to(new_user_session_path)
     end
 
     it 'shows an error' do
+      put_request
       follow_redirect!
       expect(response.body).to include('You need to sign in or sign up before continuing')
     end
 
     it 'doesn\'t update the project attributes' do
+      put_request
       project.reload
       expect(project.name).not_to eq(params[:name])
+    end
+
+    it 'doesn\'t create an artifact activity' do
+      expect { put_request }.not_to change(Activity, :count)
     end
   end
 
   describe 'PUT /projects/:id' do
-    before do
-      put_request
-      project.reload
-    end
-
     it 'returns http redirect to fallback (dashboard)' do
+      put_request
       expect(response).to redirect_to(organization_dashboard_path)
     end
 
     it 'updates the project name' do
+      put_request
+      project.reload
       expect(project.name).to eq(params[:project][:name])
     end
 
+    it 'creates an artifact activity' do
+      expect { put_request }.to change(Activity, :count).by(1)
+    end
+
     it 'shows a success message' do
+      put_request
       follow_redirect!
       expect(response.body).to include('Project successfully updated!')
     end

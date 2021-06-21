@@ -13,14 +13,24 @@ RSpec.describe 'ProjectController.delete', type: :request do
   describe 'w/o auth' do
     before do
       sign_out(:user)
-      delete_request
     end
 
     it 'returns http redirect to login' do
+      delete_request
       expect(response).to redirect_to(new_user_session_path)
     end
 
+    it 'doesn\'t delete the project' do
+      expect { delete_request }.not_to change(Project, :count)
+    end
+
+
+    it 'doesn\'t create an artifact activity' do
+      expect { delete_request }.not_to change(Activity, :count)
+    end
+
     it 'shows an error' do
+      delete_request
       follow_redirect!
       expect(response.body).to include('You need to sign in or sign up before continuing')
     end
@@ -34,6 +44,10 @@ RSpec.describe 'ProjectController.delete', type: :request do
 
     it 'deletes a single project' do
       expect { delete_request }.to change { Project.all.length }.by(-1)
+    end
+
+    it 'creates a project activity' do
+      expect { delete_request }.to change(Activity, :count).by(1)
     end
 
     it 'shows a success message' do

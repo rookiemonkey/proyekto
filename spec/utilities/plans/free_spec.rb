@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Activating Free Plan' do
+RSpec.describe Plans::Free do
   let(:organization) { create(:user).organization }
 
   before { create_list(:project, 10, organization: organization) }

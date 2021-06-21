@@ -25,6 +25,10 @@ RSpec.describe 'ArtifactController.delete', type: :request do
       expect { delete_request }.not_to change(Artifact, :count)
     end
 
+    it 'doesn\'t create an artifact activity' do
+      expect { delete_request }.not_to change(Activity, :count)
+    end
+
     it 'shows an error message' do
       delete_request
       follow_redirect!
@@ -42,6 +46,10 @@ RSpec.describe 'ArtifactController.delete', type: :request do
 
     it 'deletes a single project' do
       expect { delete_request }.to change { Artifact.all.length }.by(-1)
+    end
+
+    it 'creates an artifact activity' do
+      expect { delete_request }.to change(Activity, :count).by(1)
     end
 
     it 'deletes the image on google cloud storage' do
