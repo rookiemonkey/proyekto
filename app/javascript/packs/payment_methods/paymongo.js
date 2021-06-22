@@ -1,5 +1,6 @@
 import MultiStepForm from '../payments/form'
 import PaymentAdapter from '../payments/adapter'
+import PlanPreview from '../payments/form_components/planPreview'
 import HTMLElementLoader from '../components/loader'
 import parseFormData from '../utilities/parseFormData'
 
@@ -15,6 +16,7 @@ export default class Paymongo {
   static submitCardInformation = async event => {
     event.preventDefault()
 
+    PlanPreview.hidePreview()
     window.loader = new HTMLElementLoader('#plan-screen').show();
     const formData = parseFormData(new FormData(this.cardInformationForm()))
     formData['exp_month'] = parseInt(formData['exp_month'])

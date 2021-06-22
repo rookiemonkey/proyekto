@@ -27,10 +27,14 @@ export default class PlanListItem {
     `)
 
     // if its the current plan, add active class
-    if (name == window.currentPlan) this.parent.lastElementChild.classList.add('active')
+    if (name == window.currentPlan) {
+      this.parent.lastElementChild.classList.add('active');
+      this.parent.lastElementChild.style.cursor = 'default';
+    }
 
-    // mount event listener to the newly rendered list item
-    this.parent.lastElementChild.addEventListener('click', MultiStepForm.chosePlan)
+    // mount event listener to the newly rendered list item if its not the current plan of the organization
+    if (name !== window.currentPlan)
+      this.parent.lastElementChild.addEventListener('click', MultiStepForm.chosePlan)
   }
 
   static renderBaseHTML() {

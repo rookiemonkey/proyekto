@@ -5,15 +5,23 @@
 <%= render 'components/modal_project_update', project: @project, handle: handle %>
 <%= render 'components/modal_artifact_new', project: @project, handle: handle %>
 
-<section class="section section-main">
+<section class="section section-main project">
 
   <div class="card project-header">
     <div class="level" style="align-items: flex-start">
       <div class="level-left">
         <ul>
-          <li>Project Name: <strong><%= @project.name %></strong></li>
-          <li>Project Creation: <strong><%= @project.created_at %></strong></li>
-          <li>Last Update: <strong><%= @project.updated_at %></strong></li>
+          <li class="project-name">
+            <strong><%= @project.name %></strong>
+          </li>
+          <li class="project-created-at">
+            <span class="icon icon-created-at"><i class="mdi mdi-creation"></i></span>
+            Created: <strong><%= date_in_full_words(@project.created_at) %></strong>
+          </li>
+          <li class="project-updated-at">
+            <span class="icon icon-created-at"><i class="mdi mdi-playlist-edit"></i></span>
+            Updated: <strong><%= date_in_full_words(@project.updated_at) %></strong>
+          </li>
         </ul>
       </div>
       <div class="level-right">
@@ -44,7 +52,7 @@
     </p>
   </header>
 
-  <div class="tile is-ancestor tile-is-ancestor-custom">
+  <div class="tile is-ancestor project-artifact-cards">
     <% @artifacts.each do |artifact| %>
       <% handle = "#{artifact.id}-#{artifact.name.parameterize}" %>
 
@@ -67,14 +75,14 @@
             </div>
 
             <div class="is-clearfix artifact-card-buttons">
-              <button class="button jb-modal ml-1" data-target="view-artifact-<%= handle %>">
-                <span class="icon has-text-success-dark"><i class="mdi mdi-magnify"></i></span>
+              <button class="button jb-modal ml-1 button-view" data-target="view-artifact-<%= handle %>">
+                <span class="icon"><i class="mdi mdi-magnify"></i></span>
               </button>
-              <button class="button jb-modal ml-1" data-target="update-artifact-<%= handle %>">
-                <span class="icon has-text-warning-dark"><i class="mdi mdi-pencil"></i></span>
+              <button class="button jb-modal ml-1 button-update" data-target="update-artifact-<%= handle %>">
+                <span class="icon"><i class="mdi mdi-pencil"></i></span>
               </button>
-              <button class="button jb-modal ml-1" data-target="delete-artifact-<%= handle %>">
-                <span class="icon has-text-danger-dark"><i class="mdi mdi-window-close"></i></span>
+              <button class="button jb-modal ml-1 button-delete" data-target="delete-artifact-<%= handle %>">
+                <span class="icon"><i class="mdi mdi-window-close"></i></span>
               </button>
             </div>
 
