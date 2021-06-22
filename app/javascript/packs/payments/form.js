@@ -4,6 +4,7 @@ import PlanPreview from './form_components/planPreview';
 import PlanListItem from './form_components/planListItem';
 import PaymentMethodListItem from './form_components/paymentMethodListItem';
 import ConfirmPlanChange from './form_components/confirmPlanChange';
+import HTMLElementLoader from '../components/loader'
 
 export default class MultiStepForm extends PaymentAdapter {
   static screen = document.querySelector('#plan-screen')
@@ -41,15 +42,15 @@ export default class MultiStepForm extends PaymentAdapter {
   }
 
   static toConfirmPlanChange(newPlan) {
-    // prevent navigating to confirm plan change if chose the same plan that they are on
-    // if (newPlan == window.currentPlan) {
-    //   return window.notification.showMessage('You are already on that plan', 'error')
-    // }
     new ConfirmPlanChange(newPlan)
   }
 
   static async proceedOnPlanChange({ result, error }) {
+    if (!window.loader)
+      window.loader = new HTMLElementLoader('#plan-screen').show();
+
     if (!result) {
+      PlanPreview.showPreview()
       window.notification.showMessage(error, 'error')
       return window.loader.hide()
     }
@@ -67,6 +68,7 @@ export default class MultiStepForm extends PaymentAdapter {
     const { success, message } = await raw.json()
 
     if (!success) {
+      PlanPreview.showPreview()
       window.notification.showMessage(message, 'error')
       return window.loader.hide()
     }

@@ -56,6 +56,10 @@
             <span class="menu-item-label">Change Plan</span>
           </a>
         </li>
+        <li class="sidebar-plan-view">
+          <span><%= current_tenant.plan.upcase %> Plan</span>
+          <img class="sidebar-plan-image" src="/images/plan_<%= current_tenant.plan %>.png" />
+        </li>
       </ul>
     </div>
   </div>

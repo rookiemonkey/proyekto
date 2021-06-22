@@ -27,4 +27,7 @@ export default class PlanPreview {
       </div>
     `)
   }
+
+  static hidePreview = () => document.querySelector('.plan-preview').style.display = 'none'
+  static showPreview = () => document.querySelector('.plan-preview').style.display = 'block'
 }
