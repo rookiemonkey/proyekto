@@ -11,9 +11,17 @@
     <div class="level" style="align-items: flex-start">
       <div class="level-left">
         <ul>
-          <li>Project Name: <strong><%= @project.name %></strong></li>
-          <li>Created: <strong><%= date_in_full_words(@project.created_at) %></strong></li>
-          <li>Updated: <strong><%= date_in_full_words(@project.updated_at) %></strong></li>
+          <li class="project-name">
+            <strong><%= @project.name %></strong>
+          </li>
+          <li class="project-created-at">
+            <span class="icon icon-created-at"><i class="mdi mdi-creation"></i></span>
+            Created: <strong><%= date_in_full_words(@project.created_at) %></strong>
+          </li>
+          <li class="project-updated-at">
+            <span class="icon icon-created-at"><i class="mdi mdi-playlist-edit"></i></span>
+            Updated: <strong><%= date_in_full_words(@project.updated_at) %></strong>
+          </li>
         </ul>
       </div>
       <div class="level-right">
