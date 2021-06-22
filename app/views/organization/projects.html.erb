@@ -23,8 +23,8 @@
                   Created: <%= date_in_full_words(project.created_at) %>
                 </p>
               </div>
-              <div class="is-clearfix ">
-                <button class="button is-small is-danger is-pulled-right ml-1 <% unless project.disabled %>jb-modal<% end %>" 
+              <div class="is-clearfix project-card-buttons">
+                <button class="button is-small is-danger ml-1 <% unless project.disabled %>jb-modal<% end %>" 
                   type="button" 
                   data-target="<% unless project.disabled %>delete-project-<%= handle %><% end %>"
                   data-disabled="<% if project.disabled %>true<% else %>false<% end %>"
@@ -32,7 +32,7 @@
                   <span class="icon"><i class="mdi mdi-window-close"></i></span>
                 </button>
                 
-                <button class="button is-small is-warning is-pulled-right ml-1 <% unless project.disabled %>jb-modal<% end %>" 
+                <button class="button is-small is-warning ml-1 <% unless project.disabled %>jb-modal<% end %>" 
                   type="button"
                   data-target="<% unless project.disabled %>update-project-<%= handle %><% end %>"
                   data-disabled="<% if project.disabled %>true<% else %>false<% end %>"
