@@ -13,6 +13,8 @@
 
   .colleagues-activities-table {
     height: max-content;
+    position: sticky;
+    top: 6vh;
 
     #activities {
       text-align: center;

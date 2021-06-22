@@ -5,6 +5,7 @@ class OrganizationController < ApplicationController
 
   def projects
     @projects = Project.all
+    @activities = Activity.where(activity_type: 'project').order(created_at: :desc).limit(10)
   end
 
   def colleagues

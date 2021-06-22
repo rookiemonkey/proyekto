@@ -2,23 +2,28 @@
 
 <% @projects.reverse_order! %>
 
-<section class="section section-main">
-  <div class="tile is-ancestor tile-is-ancestor-custom">
+<section class="section section-main projects">
+  <div class="tile is-ancestor">
 
-    <% @projects.each do |project| %>
-      <% handle = "#{project.id}-#{project.name.parameterize}" %>
-    
-      <div class="tile is-parent tile-is-parent-custom <% if project.disabled %>project-is-disabled is-disabled<% end %>" data-disabled="<% if project.disabled %>true<% else %>false<% end %>">
-        <div class="card tile is-child tile-is-child-custom">
-          <div class="card-content">
-            <div class="level is-mobile">
-              <h3 class="subtitle is-spaced">
-                <a <% unless project.disabled %>href="<%= organization_project_path(project) %>"<% end %> >
-                  <%= project.name %>
-                </a>
-              </h3>
-            </div>
-              <div class="is-clearfix">
+    <div class="tile is-parent tile-is-ancestor-custom project-cards">
+      <% @projects.each do |project| %>
+        <% handle = "#{project.id}-#{project.name.parameterize}" %>
+      
+        <div class="tile is-parent tile-is-parent-custom <% if project.disabled %>project-is-disabled is-disabled<% end %>" data-disabled="<% if project.disabled %>true<% else %>false<% end %>">
+          <div class="card tile is-child tile-is-child-custom">
+            <div class="card-content">
+              <div class="level is-mobile">
+                <h3 class="subtitle is-spaced">
+                  <a <% unless project.disabled %>href="<%= organization_project_path(project) %>"<% end %> >
+                    <%= project.name %>
+                  </a>
+                </h3>
+                <p>
+                  <span class="icon icon-created-at"><i class="mdi mdi-creation"></i></span>
+                  Created: <%= date_in_full_words(project.created_at) %>
+                </p>
+              </div>
+              <div class="is-clearfix ">
                 <button class="button is-small is-danger is-pulled-right ml-1 <% unless project.disabled %>jb-modal<% end %>" 
                   type="button" 
                   data-target="<% unless project.disabled %>delete-project-<%= handle %><% end %>"
@@ -26,6 +31,7 @@
                 > 
                   <span class="icon"><i class="mdi mdi-window-close"></i></span>
                 </button>
+                
                 <button class="button is-small is-warning is-pulled-right ml-1 <% unless project.disabled %>jb-modal<% end %>" 
                   type="button"
                   data-target="<% unless project.disabled %>update-project-<%= handle %><% end %>"
@@ -34,14 +40,38 @@
                   <span class="icon"><i class="mdi mdi-pencil"></i></span>
                 </button>
               </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <%= render 'components/modal_project_delete', project: project, handle: handle %>
-      <%= render 'components/modal_project_update', project: project, handle: handle %>
+        <%= render 'components/modal_project_delete', project: project, handle: handle %>
+        <%= render 'components/modal_project_update', project: project, handle: handle %>
 
-    <% end %>
+      <% end %>
+    </div>
+
+    <div class="tile is-parent">
+      <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth projects-activities-table">
+        <thead>
+          <tr>
+            <th id="activities">Last 10 Activity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @activities.each do |activity| %>
+
+            <tr>
+              <td>
+                <p class="activity-description"><%= activity.description %></p>
+                <p class="activity-timestamp"><%= date_in_full_words_with_time(activity.created_at) %></p>
+              </td>
+            </tr>
+            
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </section>

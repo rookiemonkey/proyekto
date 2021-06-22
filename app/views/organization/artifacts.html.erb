@@ -3,7 +3,7 @@
 <section class="section section-main artifacts">
   <div class="tile is-ancestor">
     <div class="tile is-parent">
-      <div class="tile is-parent artifacts-table">
+      <div class="artifacts-table">
 
         <div style="padding-bottom: 1%">
           <%== render partial: 'components/pagination', locals: { pagy: @pagy } %>
@@ -64,29 +64,27 @@
     </div>
 
     <div class="tile is-parent">
-      <div class="tile is-parent">
-        <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth artifacts-activities-table">
-          <thead>
+      <table class="table is-fullwidth is-striped is-hoverable is-sortable is-fullwidth artifacts-activities-table">
+        <thead>
+          <tr>
+            <th id="activities">Last 10 Activity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <% @activities.each do |activity| %>
+
             <tr>
-              <th id="activities">Activities (Last 10 Activities)</th>
+              <td>
+                <p class="activity-description"><%= activity.description %></p>
+                <p class="activity-timestamp"><%= date_in_full_words_with_time(activity.created_at) %></p>
+              </td>
             </tr>
-          </thead>
+            
+          <% end %>
+        </tbody>
 
-          <tbody>
-              <% @activities.each do |activity| %>
-
-              <tr>
-                <td>
-                  <p class="activity-description"><%= activity.description %></p>
-                  <p class="activity-timestamp"><%= date_in_full_words_with_time(activity.created_at) %></p>
-                </td>
-              </tr>
-              
-            <% end %>
-          </tbody>
-
-        </table>
-      </div>
+      </table>
     </div>
   </div>
 </section>

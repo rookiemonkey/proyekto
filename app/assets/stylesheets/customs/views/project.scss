@@ -1,0 +1,37 @@
+.project {
+
+  .project-artifact-cards {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .artifact-card .artifact-card-image-container {
+      display: flex;
+      justify-content: center;
+      min-height: 270px;
+      min-width: 100%;
+    }
+
+    .artifact-card .artifact-card-name-container,
+    .artifact-card .artifact-card-buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+    .artifact-card .artifact-card-buttons button {
+      border: none;
+    }
+
+    .artifact-card .artifact-card-buttons button.button-view {
+      color: hsl(141, 53%, 53%);
+    }
+
+    .artifact-card .artifact-card-buttons button.button-update {
+      color: hsl(48, 100%, 67%);
+    }
+
+    .artifact-card .artifact-card-buttons button.button-delete {
+      color: hsl(348, 100%, 61%);
+    }
+  }
+
+}
