@@ -7,11 +7,11 @@ module ApplicationHelper
   end
 
   def date_in_full_words(date_object)
-    date_object.strftime("%A, %d %b %Y")
+    date_object.strftime('%A, %d %b %Y')
   end
 
   def date_in_full_words_with_time(date_object)
-    date_object.strftime("%A, %d %b %Y %I:%M%p")
+    date_object.strftime('%A, %d %b %Y %I:%M%p')
   end
 
   def available_plans

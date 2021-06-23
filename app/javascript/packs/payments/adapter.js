@@ -1,7 +1,8 @@
 import Paymongo from '../payment_methods/paymongo'
 
 export default class PaymentAdapter {
-  static paymongo = () => Paymongo.initialize()
+  static visa = () => Paymongo.initialize()
+  static mastercard = () => Paymongo.initialize()
 
   static adapterResponseInterface() {
     return { result: '', error: '' }

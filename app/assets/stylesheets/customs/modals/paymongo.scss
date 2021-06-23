@@ -1,11 +1,29 @@
-.powered_by p {
-  margin-top: 2.5%;
+.powered_by {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+}
+
+.powered_by p {
+  display: flex;
   align-items: center;
 }
 
 .powered_by p img {
-  width: 10%;
+  width: 20%;
   margin-left: 2.5%;
+}
+
+.card-input-icon {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-input-icon img {
+  position: relative;
+  z-index: 99;
+  width: 50px;
 }

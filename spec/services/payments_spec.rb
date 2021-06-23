@@ -18,8 +18,12 @@ RSpec.describe Payments do
       expect(all_has_image).to eq(true)
     end
 
-    it 'has paymongo' do
-      expect(data.keys.include?(:paymongo)).to eq(true)
+    it 'has visa' do
+      expect(data.keys.include?(:visa)).to eq(true)
+    end
+
+    it 'has mastercard' do
+      expect(data.keys.include?(:mastercard)).to eq(true)
     end
   end
 end

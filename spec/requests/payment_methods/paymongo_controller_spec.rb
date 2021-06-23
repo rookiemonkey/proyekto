@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PaymongoController, type: :request do
+RSpec.describe PaymentMethods::PaymongoController, type: :request do
   let(:user) { create(:user) }
 
   before { sign_in(user) }
