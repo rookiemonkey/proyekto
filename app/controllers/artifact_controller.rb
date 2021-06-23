@@ -5,11 +5,6 @@ class ArtifactController < ApplicationController
   before_action :redirect_if_artifact_is_disabled, only: %i[update delete]
   before_action :validate_image_upload, only: %i[create]
 
-  def read_all
-    @pagy, @artifacts = pagy(@project.artifacts, items: 30)
-    render 'organization/artifacts'
-  end
-
   def create
     upload_details = { image_url: nil, image_name: nil }
     upload_details = Gcloud.upload(artifact_image.tempfile.path, artifact_image_name) if artifact_image

@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   post '/projects/new', to: 'project#create', as: 'new_organization_project'
 
   # ARTIFACT
-  get '/projects/:pid/artifacts', to: 'artifact#read_all', as: 'organization_project_artifacts'
   put '/projects/:pid/artifacts/:aid', to: 'artifact#update', as: 'organization_project_artifact_update'
   delete '/projects/:pid/artifacts/:aid', to: 'artifact#delete', as: 'organization_project_artifact_delete'
   post '/projects/:pid/artifacts/new', to: 'artifact#create', as: 'new_organization_project_artifact'

@@ -38,7 +38,13 @@ RSpec.describe 'OrganizationController.projects', type: :request do
     end
 
     it 'has @projects instance variable scoped to current_tenant (organization)' do
-      expect(assigns(:projects)).to eq(Project.where(organization: user.organization))
+      database_projects = Project.where(organization: user.organization)
+
+      is_content_match = assigns(:projects).all? do |project|
+        database_projects.any? { |database_project| database_project.id == project.id }
+      end
+
+      expect(is_content_match).to eq(true)
     end
   end
 end
