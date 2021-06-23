@@ -90,7 +90,10 @@ export default class Paymongo {
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="text" class="input" name="card_number" />
+                <div class="card-input-icon">
+                  <img src="/images/icon_${MultiStepForm.state.chosen_payment_method}.png" alt="${MultiStepForm.state.chosen_payment_method}" />
+                </div>
+                <input type="text" class="input visa-input" name="card_number" />
               </div>
             </div>
           </div>
