@@ -5,8 +5,10 @@ Rails.application.routes.draw do
 
   root to: 'home#home'
 
-  # PAYMENTS
-  post '/new/payment/intent', to: 'paymongo#create', as: 'new_payment_intent'
+  # PAYMENTS METHODS
+  scope module: :payment_methods do
+    post '/new/payment/intent', to: 'paymongo#create', as: 'new_payment_intent'
+  end
 
   # ORGANIZATIONS
   get '/dashboard', to: 'organization#dashboard', as: 'organization_dashboard'
