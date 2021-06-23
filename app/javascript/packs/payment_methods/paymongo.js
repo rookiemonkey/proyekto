@@ -135,20 +135,15 @@ export default class Paymongo {
           </div>
         </div>
 
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <button type="submit" class="button is-success">SUBMIT</button>
-          </div>
+        <div class="powered_by">
+          <p>Powered by:
+            <img src="https://assets-global.website-files.com/60411749e60be86afb89d2f0/6041194a54fc8f4dfc8730bd_Paymongo_Final_Main_Logo_2020_RGB_green_horizontal.svg" alt="paymongo" />
+            <img src="/images/icon_${MultiStepForm.state.chosen_payment_method}.png" alt="${MultiStepForm.state.chosen_payment_method}" />
+          </p>
+
+          <button type="submit" class="button is-success">SUBMIT</button>
         </div>
       </form>
-
-      <div class="powered_by">
-        <p>Powered by: 
-          <img src="${MultiStepForm.paymentMethods[MultiStepForm.state.chosen_payment_method]['image']}" alt="paymongo" />
-          <img src="/images/icon_visa.png" alt="visa" />
-          <img src="/images/icon_mastercard.png" alt="mastercard" />
-        </p>
-      </div>
     `)
   }
 }

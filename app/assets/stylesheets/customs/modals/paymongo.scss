@@ -1,11 +1,16 @@
+.powered_by {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .powered_by p {
   margin-top: 2.5%;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
 }
 
 .powered_by p img {
-  width: 10%;
+  width: 20%;
   margin-left: 2.5%;
 }
