@@ -7,7 +7,7 @@ class ArtifactController < ApplicationController
 
   def create
     upload_details = { image_url: nil, image_name: nil }
-    upload_details = Gcloud.upload(artifact_image.tempfile.path, artifact_image_name) if artifact_image
+    upload_details = CloudinaryWrapper.upload(artifact_image.tempfile.path, artifact_image_name) if artifact_image
     created_artifact = Artifact.create(**artifact_params, **upload_details, project_id: params[:pid])
     raise ResourceError.new(message: get_error_for(created_artifact)) unless created_artifact.valid?
 
@@ -17,7 +17,7 @@ class ArtifactController < ApplicationController
 
   def update
     upload_details = {}
-    upload_details = Gcloud.upload(artifact_image.tempfile.path, @artifact.image_name || artifact_image_name) if artifact_image
+    upload_details = CloudinaryWrapper.upload(artifact_image.tempfile.path, @artifact.image_name || artifact_image_name) if artifact_image
     raise ResourceError.new(message: get_error_for(@artifact)) unless @artifact.update(**artifact_params, **upload_details)
 
     trigger_activity("Artifact '#{@artifact.name}' has been updated by #{current_user.full_name}")

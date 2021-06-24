@@ -52,8 +52,9 @@ RSpec.describe 'ArtifactController.delete', type: :request do
       expect { delete_request }.to change(Activity, :count).by(1)
     end
 
-    it 'deletes the image on google cloud storage' do
-      expect(Gcloud.get(artifact.image_name)).to eq(nil)
+    it 'deletes the image on cloudinary' do
+      response = Cloudinary::Uploader.destroy("#{ENV['CLOUDINARY_FOLDER_NAME']}/#{artifact.image_name}")
+      expect(response['result']).to eq('not found')
     end
 
     it 'shows a success message' do
