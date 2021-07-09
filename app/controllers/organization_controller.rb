@@ -2,8 +2,20 @@ class OrganizationController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    artifacts = Artifact.all
+    @produced_artifacts = Hash.new
+
+    artifacts.each do |artifact|
+      date = artifact.created_at.strftime('%F')
+
+      @produced_artifacts[date] = 0 if @produced_artifacts[date].nil?
+      @produced_artifacts[date] += 1
+    end
+
+    @produced_artifacts = @produced_artifacts.sort_by { |date, _| date }.reverse[0..9]
+
     @num_of_projects = Project.count
-    @num_of_artifacts = Artifact.count
+    @num_of_artifacts = artifacts.count
     @num_of_staffs = User.count
   end
 

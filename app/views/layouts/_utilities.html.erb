@@ -1,0 +1,14 @@
+<script>
+  function toScriptStrings(functionName) {
+    let functionBody = functionName.toString()
+    return `<script>${functionBody.match(/function[^{]+\{([\s\S]*)\}$/)[1]}<\/script>` /* remove the function() {  } */
+  }
+
+  function appendToBodyAndExecuteOnLoad(functionName) {
+    document.addEventListener('turbolinks:load', () => {
+      const range = document.createRange()
+      range.setStart(document.body, 0)                                         
+      document.body.appendChild(range.createContextualFragment(toScriptStrings(functionName)))
+    })
+  }
+</script>
