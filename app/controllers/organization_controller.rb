@@ -1,7 +1,11 @@
 class OrganizationController < ApplicationController
   before_action :authenticate_user!
 
-  def dashboard; end
+  def dashboard
+    @num_of_projects = Project.count
+    @num_of_artifacts = Artifact.count
+    @num_of_staffs = User.count
+  end
 
   def projects
     @projects = Project.all
