@@ -4,6 +4,10 @@ An app allowing organization to manage their projects by creating projects (depe
 
 Consider checking the repo's issues, all of my todos are in there :smile:
 
+![Screenshot](./screenshots/proyekto3.jpg)
+![Screenshot](./screenshots/proyekto2.jpg)
+![Screenshot](./screenshots/proyekto1.jpg)
+
 ## Setup Locally
 
 * Environment Variables
