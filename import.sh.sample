@@ -1,0 +1,14 @@
+# auto import of environment variables
+# run on terminal: ./import.sh
+
+heroku config:set PAYMONGO_PK= &&
+heroku config:set PAYMONGO_SK= &&
+heroku config:set CLOUDINARY_CLOUD_NAME= &&
+heroku config:set CLOUDINARY_API_KEY= &&
+heroku config:set CLOUDINARY_SECRET_KEY= &&
+heroku config:set CLOUDINARY_FOLDER_NAME= &&
+heroku config:set MAILTRAP_USERNAME= &&
+heroku config:set MAILTRAP_PASSWORD= &&
+heroku config:set MAILTRAP_ADDRESS= &&
+heroku config:set MAILTRAP_DOMAIN= &&
+heroku config:set MAILTRAP_PORT=
