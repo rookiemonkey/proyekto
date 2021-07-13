@@ -1,3 +1,4 @@
+require 'faker'
 require_relative 'seeds/organization_seed'
 require_relative 'seeds/user_seed'
 require_relative 'seeds/user_accessible_seed'
