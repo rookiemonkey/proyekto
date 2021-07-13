@@ -7,9 +7,9 @@ module Seeds
     def self.produce
       Seeds::Organization.all.each do |organization|
         @@count.times do
-          new_colleague_full_name = Faker::Name.name
+          new_colleague_full_name = ::Faker::Name.name
           
-          ::User.create(email:Faker::Internet.unique.safe_email,
+          ::User.create(email: ::Faker::Internet.unique.safe_email,
                         full_name: new_colleague_full_name,
                         organization: organization,
                         password: '987654321')

@@ -6,7 +6,7 @@ module Seeds
     @@other_tenant = nil
 
     def self.produce
-      @@count.times { ::Organization.create(name: Faker::Company.name, plan: 'enterprise') }
+      @@count.times { ::Organization.create(name: ::Faker::Company.name, plan: 'enterprise') }
       @@all = ::Organization.all
       @@current_tenant = @@all.first
       @@other_tenant = @@all.last

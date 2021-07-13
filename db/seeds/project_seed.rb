@@ -6,7 +6,7 @@ module Seeds
     def self.produce
       Seeds::Organization.all.each do |organization| 
         @@count.times do 
-          new_project_name = Faker::Movie.title
+          new_project_name = ::Faker::Movie.title
 
           ::Project.create(name: new_project_name, organization: organization)
           ::Activity.create(description: "[SEEDER]: Project '#{new_project_name}'' has been created",

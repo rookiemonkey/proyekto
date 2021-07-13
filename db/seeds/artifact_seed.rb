@@ -7,8 +7,8 @@ module Seeds
         @@count.times do
           created_at = Faker::Date.between(from: 15.days.ago, to: Date.today)
 
-          new_artifact = ::Artifact.create( name: Faker::Construction.material,
-                                            description: Faker::Quote.famous_last_words,
+          new_artifact = ::Artifact.create( name: ::Faker::Construction.material,
+                                            description: ::Faker::Quote.famous_last_words,
                                             created_at: created_at)
 
           ::Activity.create(description: "[SEEDER]: Artifact '#{new_artifact.name}'' has been created",
